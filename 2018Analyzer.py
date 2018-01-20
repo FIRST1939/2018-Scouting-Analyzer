@@ -5,14 +5,41 @@ Created on Sat Jan 20 10:27:53 2018
 @author: Saketh
 """
 import tbaUtils
+from pprint import pprint
 
-def makeMatchList():
+def makeMatchList(event, year = 2018):
     '''
     Get match list from the Blue Alliance website depending on what event we're 
     going to. Format it and write it to a file. Have that read by the Scouting 
     Program and have formatted so that other scouting software can use it.
     '''
-    pass
+    RawMatches = tbaUtils.get_event_matches(event, year) 
+    pprint(RawMatches[0:2])
+    
+    print()
+    MatchList = []
+    for Match in RawMatches:
+        #Some of these matches are not quals, need to filter out non qm eventually
+        MatchNum = Match['match_number']
+        BlueTeam = []
+        
+        for team in Match['alliances']['blue']['teams']:
+        
+            BlueTeam.append(int(team[3:]))
+        
+        
+        RedTeam = []
+        
+        for team in Match['alliances']['red']['teams']:
+            
+            RedTeam.append(int(team[3:]))
+            
+        comp_level = Match['comp_level']
+        print(MatchNum, BlueTeam, RedTeam, comp_level)
+        if comp_level == 'qm':
+            MatchList.append([MatchNum, BlueTeam, RedTeam])
+    print()
+    pprint(MatchList)    
 
 def readMatchList():
     '''
