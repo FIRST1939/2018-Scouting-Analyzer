@@ -5,6 +5,8 @@ Created on Sat Jan 20 10:27:53 2018
 @author: Saketh
 """
 import tbaUtils
+
+import numpy as np
 from pprint import pprint
 
 def makeMatchList(event, year = 2018):
@@ -14,32 +16,41 @@ def makeMatchList(event, year = 2018):
     Program and have formatted so that other scouting software can use it.
     '''
     RawMatches = tbaUtils.get_event_matches(event, year) 
+
     pprint(RawMatches[0:2])
     
     print()
     MatchList = []
     for Match in RawMatches:
+        
+        ShortMatch = []
         #Some of these matches are not quals, need to filter out non qm eventually
         MatchNum = Match['match_number']
-        BlueTeam = []
+        ShortMatch.append(MatchNum)
         
         for team in Match['alliances']['blue']['teams']:
         
-            BlueTeam.append(int(team[3:]))
-        
-        
-        RedTeam = []
+            ShortMatch.append(int(team[3:]))
         
         for team in Match['alliances']['red']['teams']:
             
-            RedTeam.append(int(team[3:]))
+            ShortMatch.append(int(team[3:]))
+            
             
         comp_level = Match['comp_level']
-        print(MatchNum, BlueTeam, RedTeam, comp_level)
         if comp_level == 'qm':
-            MatchList.append([MatchNum, BlueTeam, RedTeam])
+            MatchList.append(ShortMatch)
+       
+      
     print()
+    MatchList.sort()
     pprint(MatchList)    
+
+
+    with open('MatchList.csv', 'w') as File:
+        for Match in MatchList : 
+            Outstr = str(Match).replace('[', '').replace(']', '').replace(' ', '')+'\n'
+            File.write(Outstr)
 
 def readMatchList():
     '''
