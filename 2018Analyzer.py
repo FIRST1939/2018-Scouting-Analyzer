@@ -5,7 +5,7 @@ Created on Sat Jan 20 10:27:53 2018
 @author: Saketh
 """
 import tbaUtils
-
+import pandas as pd
 import numpy as np
 from pprint import pprint
 
@@ -54,9 +54,27 @@ def makeMatchList(event, year = 2018):
 
 def readMatchList():
     '''
+
+    
     Read the Match List file created by makeMatchList. 
+    
+    
     '''
-    pass
+    with open('MatchList.csv', 'r') as Matchlist:
+       data = Matchlist.readlines()
+   
+   
+    result = []
+    for line in data:
+        line = line.replace('\n' , '')
+        dataresult = line.split(',')
+        for idx in range(dataresult):
+            pass
+            
+        result.append(dataresult)
+        
+    return result
+   
 
 def readScout():
     '''
@@ -65,7 +83,8 @@ def readScout():
     '''
     pass 
 
-def FindPartners(MatchList):
+def FindPartners():
+    
     '''
     Takes the Match List from the entire competition and finds the matches we're
     in and finds the teams that are with us.
