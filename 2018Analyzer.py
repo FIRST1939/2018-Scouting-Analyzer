@@ -83,13 +83,20 @@ def readScout():
     '''
     pass 
 
-def FindPartners():
+def FindPartners(Matchlist, team = 1939):
     
     '''
     Takes the Match List from the entire competition and finds the matches we're
     in and finds the teams that are with us.
     '''
-    pass
+    for match in Matchlist:
+        if team in match[1:]:
+            print(match)
+            if team in match[1:4]:
+                alliance = 'blue'
+            else:
+                alliance = 'red'
+            print(alliance)
 
 def MatchReport(Scoutdf):
     ''' (dataframe)->dataframe
