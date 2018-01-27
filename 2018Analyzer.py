@@ -68,8 +68,8 @@ def readMatchList():
     for line in data:
         line = line.replace('\n' , '')
         dataresult = line.split(',')
-        for idx in range(dataresult):
-            pass
+        for idx in range(len(dataresult)):
+            dataresult[idx] = int(dataresult[idx])
             
         result.append(dataresult)
         
