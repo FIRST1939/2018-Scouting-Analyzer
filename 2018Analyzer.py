@@ -94,9 +94,13 @@ def FindPartners(Matchlist, team = 1939):
             print(match)
             if team in match[1:4]:
                 alliance = 'blue'
+                allies = match[1:4].remove(team)
+                opponents = match[4:7]
             else:
                 alliance = 'red'
-            print(alliance)
+                allies = match[4:7]
+                opponents = match[1:4]
+            print(alliance, allies, opponents)
 
 def MatchReport(Scoutdf):
     ''' (dataframe)->dataframe
