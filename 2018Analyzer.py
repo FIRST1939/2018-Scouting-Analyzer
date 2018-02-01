@@ -81,7 +81,11 @@ def readScout():
     Read Scouting Data from a file, fix formatting to numeric where neccessary,
     clean the data, report any implausibile data.  
     '''
-    pass 
+    with open('FAKE-DATA-1-TEAM.csv', 'r') as ScoutFile:
+        ScoutData = pd.read_csv(ScoutFile) 
+    print(ScoutData)
+    return ScoutData
+    
 
 def FindPartners(Matchlist, team = 1939):
     
@@ -94,14 +98,22 @@ def FindPartners(Matchlist, team = 1939):
             print(match)
             if team in match[1:4]:
                 alliance = 'blue'
-                allies = match[1:4].remove(team)
+                opposing = 'red'
+                allies = match[1:4]
                 opponents = match[4:7]
+                allies.remove(team)
+            
+                
             else:
                 alliance = 'red'
+                opposing = 'blue'
                 allies = match[4:7]
                 opponents = match[1:4]
-            print(alliance, allies, opponents)
-
+                allies.remove(team)
+            
+            
+            print(alliance, allies, opposing, opponents)
+            
 def MatchReport(Scoutdf):
     ''' (dataframe)->dataframe
     (Scouting Data)->PivotTable with upcoming match partners

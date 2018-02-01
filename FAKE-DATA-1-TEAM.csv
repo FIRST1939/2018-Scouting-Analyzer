@@ -1,0 +1,4 @@
+﻿id,match,team,autoCrossLineTry,autoCrossLineSuccess,autoBoxToSwitchTry,autoBoxToSwitchCount,autoBoxToWrongSwitchTry,autoBoxToWrongSwitchCount,autoBoxToScaleTry,autoBoxToScaleCount,autoBoxToWrongScaleTry,autoBoxToWrongScaleCount,autoBoxPickupTry,autoBoxPickupCount,teleBoxToSwitchCount,teleBoxToScaleCount,teleReclaimScaleCount,teleBoxToOpponentSwitchCount,teleBoxToExchangeCount,teleDroppedBoxCount,teleDefenseBlockCount,tippedBot,deadBot,recoveredBot,penaltyStandardFoulCount,penaltyTechnicalFoulCount,penaltyYellowCardCount,penaltyRedCard,endParked,endClimbedCenter,endClimbedSide,endClimbedRamp,endDeployRampTry,postCommentsPro,postCommentsCon
+54,9,1806,,1,1,,,,,,,,,,5,2,,,1,,,,,,,,,,1,,,,,This robot is kind of snazzy,
+102,17,1806,,1,,1,,,,,,,,,8,0,,,1,,,,,,,,,,1,,,,,Robot did all the things,"Failed a climb, also caught fire"
+136,23,1806,,1,,1,,,,,,,1,,4,4,,,2,,,,,,,,,,,1,,,,Auton improving,100 percent less fire this match
