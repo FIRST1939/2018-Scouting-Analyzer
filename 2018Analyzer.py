@@ -133,12 +133,29 @@ def SearchTeam(Scoutdf, TeamNumber):
     '''
     
     TeamDf = Scoutdf[Scoutdf.team == TeamNumber]
-    TeamDf['totaltelecubes'] = TeamDf['teleBoxToSwitchCount'] + TeamDf['teleBoxToScaleCount'] 
-    TeamDf['totaltelecubes'] += TeamDf['teleBoxToExchangeCount'] 
-    TeamDf['totaltelecubes'] += TeamDf['teleBoxToOpponentSwitchCount']
     
+    TeamDf['avgtelecubes'] = TeamDf['teleBoxToSwitchCount'] + TeamDf['teleBoxToScaleCount'] 
+    TeamDf['avgtelecubes'] += TeamDf['teleBoxToExchangeCount'] 
+    TeamDf['avgtelecubes'] += TeamDf['teleBoxToOpponentSwitchCount']
+  
+    TeamDf['avgautocubes'] = TeamDf['autoBoxToSwitchCount'] + TeamDf['autoBoxToWrongSwitchCount']
+    TeamDf['avgautocubes'] += TeamDf['autoBoxToScaleCount']
+    TeamDf['avgautocubes'] += TeamDf['autoBoxToWrongScaleCount']
+    
+    TeamDf['avgclimbs'] = TeamDf['endClimbedCenter'] + TeamDf['endClimbedSide']
+    TeamDf['avgclimbs'] = TeamDf['endClimbedRamp']
+    
+    TeamDf['totalmatches'] = TeamDf['team'] 
+    
+    TeamPivot = pd.pivot_table(TeamDf, values = ['avgtelecubes', 'avgautocubes', 'avgclimbs'], index = 'team', aggfunc = np.average)
+    MatchCount = pd.pivot_table(TeamDf, values = ['totalmatches'], index = 'team', aggfunc = np.count_nonzero)
     #+ TeamDf['teleBoxToOpponentSwitchCount'] + ['teleBoxToExchangeCount']
     print(TeamDf)
+    
+    print('PivotTable')
+    
+    print(TeamPivot)
+    print(MatchCount)
 
 def PickList():
     '''
