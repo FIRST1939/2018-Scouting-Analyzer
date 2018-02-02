@@ -34,13 +34,11 @@ def makeMatchList(event, year = 2018):
         
         for team in Match['alliances']['red']['teams']:
             
-            ShortMatch.append(int(team[3:]))
-            
+            ShortMatch.append(int(team[3:])) 
             
         comp_level = Match['comp_level']
         if comp_level == 'qm':
             MatchList.append(ShortMatch)
-       
       
     print()
     MatchList.sort()
@@ -53,13 +51,12 @@ def makeMatchList(event, year = 2018):
             File.write(Outstr)
 
 def readMatchList():
-    '''
-
     
+    '''
     Read the Match List file created by makeMatchList. 
     
-    
     '''
+    
     with open('MatchList.csv', 'r') as Matchlist:
        data = Matchlist.readlines()
    
@@ -84,7 +81,8 @@ def readScout():
     with open('FAKE-DATA-1-TEAM.csv', 'r') as ScoutFile:
         ScoutData = pd.read_csv(ScoutFile) 
     print(ScoutData)
-    return ScoutData
+    Result = ScoutData.fillna(value = 0)
+    return Result
     
 
 def FindPartners(Matchlist, team = 1939):
@@ -133,7 +131,14 @@ def SearchTeam(Scoutdf, TeamNumber):
     '''
     A Search function where we can find a team and their specific stats.
     '''
-    pass
+    
+    TeamDf = Scoutdf[Scoutdf.team == TeamNumber]
+    TeamDf['totaltelecubes'] = TeamDf['teleBoxToSwitchCount'] + TeamDf['teleBoxToScaleCount'] 
+    TeamDf['totaltelecubes'] += TeamDf['teleBoxToExchangeCount'] 
+    TeamDf['totaltelecubes'] += TeamDf['teleBoxToOpponentSwitchCount']
+    
+    #+ TeamDf['teleBoxToOpponentSwitchCount'] + ['teleBoxToExchangeCount']
+    print(TeamDf)
 
 def PickList():
     '''
@@ -141,3 +146,14 @@ def PickList():
     that rank robotics based on that catagory. Do not pick catagory.
     '''
     pass
+
+
+
+
+
+
+
+
+
+
+
