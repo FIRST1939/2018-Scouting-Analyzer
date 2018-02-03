@@ -42,7 +42,7 @@ def makeMatchList(event, year = 2018):
       
     print()
     MatchList.sort()
-    pprint(MatchList)    
+    #pprint(MatchList)    
 
 
     with open('MatchList.csv', 'w') as File:
@@ -80,7 +80,7 @@ def readScout():
     '''
     with open('fake-data-6-team.csv', 'r') as ScoutFile:
         ScoutData = pd.read_csv(ScoutFile, sep = '|') 
-    print(ScoutData)
+    #print(ScoutData)
     Result = ScoutData.fillna(value = 0)
     return Result
     
@@ -91,34 +91,42 @@ def FindPartners(Matchlist, team = 1939):
     Takes the Match List from the entire competition and finds the matches we're
     in and finds the teams that are with us.
     '''
+    result = []
     for match in Matchlist:
+        thisMatch = {}
         if team in match[1:]:
             print(match)
             if team in match[1:4]:
-                alliance = 'blue'
-                opposing = 'red'
+                thisMatch['alliance'] = 'blue'
+                thisMatch['opposing'] = 'red'
                 allies = match[1:4]
-                opponents = match[4:7]
+                thisMatch['opponents'] = match[4:7]
                 allies.remove(team)
+                thisMatch['allies'] = allies
             
                 
             else:
-                alliance = 'red'
-                opposing = 'blue'
+                thisMatch['alliance'] = 'red'
+                thisMatch['opposing'] = 'blue'
                 allies = match[4:7]
-                opponents = match[1:4]
+                thisMatch['opponents'] = match[1:4]
                 allies.remove(team)
+                thisMatch['allies'] = allies
             
+            thisMatch['match'] = match[0] 
+            result.append(thisMatch)
             
-            print(alliance, allies, opposing, opponents)
+    return result
             
-def MatchReport(Scoutdf):
+def MatchReport(MatchList, PivotDf, Scoutdf):
     ''' (dataframe)->dataframe
     (Scouting Data)->PivotTable with upcoming match partners
     Take the scouting data, trim down to only partners and opponents.
     Create a report by match showing partners and opponents.
-    '''
-    pass
+    ''' 
+    print(FindPartners(readMatchList(), 1806))
+    print(SearchTeam(readScout(), TeamStats(readScout()), 1806))
+
 
 def Day1Report(Scoutdf):
     '''(dataframe)->None
@@ -127,13 +135,13 @@ def Day1Report(Scoutdf):
     '''
     pass
 
-def SearchTeam(Scoutdf, TeamNumber):
+def SearchTeam(Scoutdf, SumDf, TeamNumber):
     '''
     A Search function where we can find a team and their specific stats.
     '''
     
     TeamDf = Scoutdf[Scoutdf.team == TeamNumber]
-    
+    print(TeamDf)
     
     
     
@@ -164,10 +172,10 @@ def TeamStats(TeamDf):
 
     TeamPivot = pd.merge(AvgTeamPivot, MatchCount, on = 'team')
     
-    print(TeamDf)
-    print('PivotTable')
-    print(TeamPivot)
- 
+   
+
+    
+    return TeamDf, TeamPivot
 
 def PickList():
     '''
@@ -176,9 +184,25 @@ def PickList():
     '''
     pass
 
-
-
-
+def Main():
+    print('press 1 to acquire a Match List')
+    print('press 2 to get a prematch Scouting Report')
+    selection = input('enter number: ')
+    
+    if selection == '1':
+        event = input('enter event code: ')
+        makeMatchList(event, 2017)
+    elif selection == '2':
+        ReadData = readScout()
+        MatchList = readMatchList()
+        TeamDf, PivotDf = TeamStats(ReadData)
+        MatchReport(MatchList, PivotDf, TeamDf)
+        
+    
+Main()
+                      
+                      
+                     
 
 
 
