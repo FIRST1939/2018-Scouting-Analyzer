@@ -118,15 +118,21 @@ def FindPartners(Matchlist, team = 1939):
             
     return result
             
-def MatchReport(MatchList, PivotDf, Scoutdf):
+def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     ''' (dataframe)->dataframe
     (Scouting Data)->PivotTable with upcoming match partners
     Take the scouting data, trim down to only partners and opponents.
     Create a report by match showing partners and opponents.
     ''' 
-    print(FindPartners(readMatchList(), 1806))
-    print(SearchTeam(readScout(), TeamStats(readScout()), 1806))
-
+    UpcomingMatches = FindPartners(MatchList, TeamNumber)
+    UpcomingMatches.iloc[TeamNumber]
+    #headers and our team
+    print('Team', TeamNumber, 'MatchReport')
+    print('Matches Played =', TeamPivot['MatchCount'])
+    
+    
+    
+    SearchTeam(Scoutdf, PivotDf, TeamNumber)
 
 def Day1Report(Scoutdf):
     '''(dataframe)->None
@@ -141,7 +147,8 @@ def SearchTeam(Scoutdf, SumDf, TeamNumber):
     '''
     
     TeamDf = Scoutdf[Scoutdf.team == TeamNumber]
-    print(TeamDf)
+    
+    return TeamDf
     
     
     
@@ -193,10 +200,11 @@ def Main():
         event = input('enter event code: ')
         makeMatchList(event, 2017)
     elif selection == '2':
+        Team = input('enter team number: ')
         ReadData = readScout()
         MatchList = readMatchList()
         TeamDf, PivotDf = TeamStats(ReadData)
-        MatchReport(MatchList, PivotDf, TeamDf)
+        MatchReport(MatchList, PivotDf, TeamDf, Team)
         
     
 Main()
