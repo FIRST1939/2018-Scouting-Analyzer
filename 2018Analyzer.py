@@ -78,8 +78,8 @@ def readScout():
     Read Scouting Data from a file, fix formatting to numeric where neccessary,
     clean the data, report any implausibile data.  
     '''
-    with open('FAKE-DATA-1-TEAM.csv', 'r') as ScoutFile:
-        ScoutData = pd.read_csv(ScoutFile) 
+    with open('fake-data-6-team.csv', 'r') as ScoutFile:
+        ScoutData = pd.read_csv(ScoutFile, sep = '|') 
     print(ScoutData)
     Result = ScoutData.fillna(value = 0)
     return Result
@@ -134,6 +134,15 @@ def SearchTeam(Scoutdf, TeamNumber):
     
     TeamDf = Scoutdf[Scoutdf.team == TeamNumber]
     
+    
+    
+    
+def TeamStats(TeamDf):
+    '''
+    Takes full dataframe, and creates per match calculated values. Creates a pivot
+    dataframe with overall team statistics
+    '''
+    
     TeamDf['avgtelecubes'] = TeamDf['teleBoxToSwitchCount'] + TeamDf['teleBoxToScaleCount'] 
     TeamDf['avgtelecubes'] += TeamDf['teleBoxToExchangeCount'] 
     TeamDf['avgtelecubes'] += TeamDf['teleBoxToOpponentSwitchCount']
@@ -142,20 +151,23 @@ def SearchTeam(Scoutdf, TeamNumber):
     TeamDf['avgautocubes'] += TeamDf['autoBoxToScaleCount']
     TeamDf['avgautocubes'] += TeamDf['autoBoxToWrongScaleCount']
     
-    TeamDf['avgclimbs'] = TeamDf['endClimbedCenter'] + TeamDf['endClimbedSide']
-    TeamDf['avgclimbs'] = TeamDf['endClimbedRamp']
+    TeamDf['totalclimbs'] = TeamDf['endClimbedCenter'] + TeamDf['endClimbedSide']
+    TeamDf['totalclimbs'] = TeamDf['endClimbedRamp']
     
     TeamDf['totalmatches'] = TeamDf['team'] 
     
-    TeamPivot = pd.pivot_table(TeamDf, values = ['avgtelecubes', 'avgautocubes', 'avgclimbs'], index = 'team', aggfunc = np.average)
-    MatchCount = pd.pivot_table(TeamDf, values = ['totalmatches'], index = 'team', aggfunc = np.count_nonzero)
-    #+ TeamDf['teleBoxToOpponentSwitchCount'] + ['teleBoxToExchangeCount']
+    AvgTeamPivot = pd.pivot_table(TeamDf, values = ['avgtelecubes', 'avgautocubes'], index = 'team', aggfunc = np.average)
+    MatchCount = pd.pivot_table(TeamDf, values = ['totalmatches', 'totalclimbs'], index = 'team', aggfunc = np.count_nonzero)
+
+    AvgTeamPivot.reset_index(inplace = True)
+    MatchCount.reset_index(inplace = True)
+
+    TeamPivot = pd.merge(AvgTeamPivot, MatchCount, on = 'team')
+    
     print(TeamDf)
-    
     print('PivotTable')
-    
     print(TeamPivot)
-    print(MatchCount)
+ 
 
 def PickList():
     '''
