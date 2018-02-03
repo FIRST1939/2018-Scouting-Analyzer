@@ -95,7 +95,7 @@ def FindPartners(Matchlist, team = 1939):
     for match in Matchlist:
         thisMatch = {}
         if team in match[1:]:
-            print(match)
+         #   print(match)
             if team in match[1:4]:
                 thisMatch['alliance'] = 'blue'
                 thisMatch['opposing'] = 'red'
@@ -125,14 +125,20 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     Create a report by match showing partners and opponents.
     ''' 
     UpcomingMatches = FindPartners(MatchList, TeamNumber)
-    UpcomingMatches.iloc[TeamNumber]
+    
     #headers and our team
     print('Team', TeamNumber, 'MatchReport')
-    print('Matches Played =', TeamPivot['MatchCount'])
-    
-    
-    
-    SearchTeam(Scoutdf, PivotDf, TeamNumber)
+    print(PivotDf)
+    print(Scoutdf.head())
+    print()
+
+    #get only 1806 matchcount
+   
+    print('Matches Played =')
+   # print(PivotDf['totalmatches'])
+    print(PivotDf[PivotDf.team == TeamNumber]['totalmatches'])
+    #print(PivotDf['totalmatches', PivotDf.team == TeamNumber])
+    #SearchTeam(Scoutdf, PivotDf, TeamNumber)
 
 def Day1Report(Scoutdf):
     '''(dataframe)->None
@@ -201,6 +207,11 @@ def Main():
         makeMatchList(event, 2017)
     elif selection == '2':
         Team = input('enter team number: ')
+        if Team.isdigit():
+            Team = int(Team)
+        else:
+            print('input error')
+            return
         ReadData = readScout()
         MatchList = readMatchList()
         TeamDf, PivotDf = TeamStats(ReadData)
