@@ -42,7 +42,7 @@ def makeMatchList(event, year = 2018):
       
     print()
     MatchList.sort()
-    #pprint(MatchList)    
+    pprint(MatchList)    
 
 
     with open('MatchList.csv', 'w') as File:
@@ -126,17 +126,25 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     ''' 
     UpcomingMatches = FindPartners(MatchList, TeamNumber)
     
+    
     #headers and our team
-    print('Team', TeamNumber, 'MatchReport')
-    print(PivotDf)
-    print(Scoutdf.head())
-    print()
+    #print('Team', TeamNumber, 'MatchReport')
+    #print(PivotDf)
+    #print(Scoutdf.head())
+    #print()
 
     #get only 1806 matchcount
    
-    print('Matches Played =')
+
    # print(PivotDf['totalmatches'])
-    print(PivotDf[PivotDf.team == TeamNumber]['totalmatches'])
+    PivotDf.set_index('team', inplace = True) 
+    print('Matches Played =', PivotDf.at[TeamNumber, 'totalmatches'])
+    print('Average Auto Cubes =', PivotDf.at[TeamNumber, 'avgautocubes'])
+    print('Average Tele Cubes =', PivotDf.at[TeamNumber, 'avgtelecubes'])
+    print('Total climbs =', PivotDf.at[TeamNumber, 'totalclimbs'])
+    #print(PivotDf[PivotDf.team == TeamNumber]['avgautocubes'])
+    #print(PivotDf[PivotDf.team == TeamNumber]['avgtelecubes'])
+    #print(PivotDf[PivotDf.team == TeamNumber]['totalclimbs'])
     #print(PivotDf['totalmatches', PivotDf.team == TeamNumber])
     #SearchTeam(Scoutdf, PivotDf, TeamNumber)
 
@@ -147,10 +155,17 @@ def Day1Report(Scoutdf):
     '''
     pass
 
-def SearchTeam(Scoutdf, SumDf, TeamNumber):
+def SearchTeam(Scoutdf, PivotDf, TeamNumber):
     '''
     A Search function where we can find a team and their specific stats.
     '''
+    print('Matches Played =')
+   # print(PivotDf['totalmatches'])
+    PivotDf.set_index('team', inplace = True)
+    print(PivotDf.loc[TeamNumber]['totalmatches'])
+    print(PivotDf[PivotDf.team == TeamNumber]['avgautocubes'])
+    print(PivotDf[PivotDf.team == TeamNumber]['avgtelecubes'])
+    print(PivotDf[PivotDf.team == TeamNumber]['totalclimbs'])
     
     TeamDf = Scoutdf[Scoutdf.team == TeamNumber]
     
