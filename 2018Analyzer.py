@@ -71,8 +71,18 @@ def readMatchList():
         result.append(dataresult)
         
     return result
-   
 
+'''
+def readTeamMatches(TeamNumber):
+    data = FindPartners(readMatchList(), TeamNumber)
+    output = []
+    for i in range(0, len(data)):
+        matchData = data[i]
+        print(matchData, type(matchData))
+        match = matchData['3']
+        output.append(match)
+    return output
+'''
 def readScout():
     '''
     Read Scouting Data from a file, fix formatting to numeric where neccessary,
@@ -80,7 +90,6 @@ def readScout():
     '''
     with open('fake-data-6-team.csv', 'r') as ScoutFile:
         ScoutData = pd.read_csv(ScoutFile, sep = '|') 
-    #print(ScoutData)
     Result = ScoutData.fillna(value = 0)
     return Result
     
@@ -123,10 +132,7 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     (Scouting Data)->PivotTable with upcoming match partners
     Take the scouting data, trim down to only partners and opponents.
     Create a report by match showing partners and opponents.
-    ''' 
-    UpcomingMatches = FindPartners(MatchList, TeamNumber)
-    
-    
+    '''     
     #headers and our team
     #print('Team', TeamNumber, 'MatchReport')
     #print(PivotDf)
@@ -134,14 +140,19 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     #print()
 
     #get only 1806 matchcount
-   
-
    # print(PivotDf['totalmatches'])
     PivotDf.set_index('team', inplace = True) 
     print('Matches Played =', PivotDf.at[TeamNumber, 'totalmatches'])
     print('Average Auto Cubes =', PivotDf.at[TeamNumber, 'avgautocubes'])
     print('Average Tele Cubes =', PivotDf.at[TeamNumber, 'avgtelecubes'])
     print('Total climbs =', PivotDf.at[TeamNumber, 'totalclimbs'])
+    #arr = np.array(FindPartners(MatchList, TeamNumber))
+    #print(arr[matchNum])
+    
+    
+    
+    
+    #print('Comments', PivotDf.at[TeamNumber, 'PositiveComments'])
     #print(PivotDf[PivotDf.team == TeamNumber]['avgautocubes'])
     #print(PivotDf[PivotDf.team == TeamNumber]['avgtelecubes'])
     #print(PivotDf[PivotDf.team == TeamNumber]['totalclimbs'])
@@ -159,17 +170,18 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber):
     '''
     A Search function where we can find a team and their specific stats.
     '''
-    print('Matches Played =')
    # print(PivotDf['totalmatches'])
     PivotDf.set_index('team', inplace = True)
-    print(PivotDf.loc[TeamNumber]['totalmatches'])
-    print(PivotDf[PivotDf.team == TeamNumber]['avgautocubes'])
-    print(PivotDf[PivotDf.team == TeamNumber]['avgtelecubes'])
-    print(PivotDf[PivotDf.team == TeamNumber]['totalclimbs'])
+    print('Matches Played =', PivotDf.loc[TeamNumber]['totalmatches'])
     
-    TeamDf = Scoutdf[Scoutdf.team == TeamNumber]
+    print('\nMatch Summary')
+    print(PivotDf.loc[TeamNumber])
+    print('\nMatch Details')
     
-    return TeamDf
+   #print(PivotDf[PivotDf.team == TeamNumber]['PositiveComments'])
+    print(Scoutdf[Scoutdf.team == TeamNumber])
+    
+    
     
     
     
@@ -188,15 +200,19 @@ def TeamStats(TeamDf):
     TeamDf['avgautocubes'] += TeamDf['autoBoxToWrongScaleCount']
     
     TeamDf['totalclimbs'] = TeamDf['endClimbedCenter'] + TeamDf['endClimbedSide']
-    TeamDf['totalclimbs'] = TeamDf['endClimbedRamp']
+    TeamDf['totalclimbs'] = TeamDf['endClimbedRamp'] + TeamDf['endDeployRamp']
+    
+    #TeamDf['PostiveComments'] = TeamDf['postCommentsPro'] 
     
     TeamDf['totalmatches'] = TeamDf['team'] 
     
     AvgTeamPivot = pd.pivot_table(TeamDf, values = ['avgtelecubes', 'avgautocubes'], index = 'team', aggfunc = np.average)
     MatchCount = pd.pivot_table(TeamDf, values = ['totalmatches', 'totalclimbs'], index = 'team', aggfunc = np.count_nonzero)
-
+    #Comments = pd.pivot_table(TeamDf, values = ['PositiveComments'], index = 'team', aggfunc = lambda x: ' '.join(x))
+    
     AvgTeamPivot.reset_index(inplace = True)
     MatchCount.reset_index(inplace = True)
+    #Comments.reset_index(inplace = True)
 
     TeamPivot = pd.merge(AvgTeamPivot, MatchCount, on = 'team')
     
@@ -212,29 +228,41 @@ def PickList():
     '''
     pass
 
+def enterTeam():
+     Team = input('enter team number: ')
+     if Team.isdigit():
+        Team = int(Team)
+        return Team
+     else:
+        print('input error')
+        return
+    
 def Main():
     print('press 1 to acquire a Match List')
     print('press 2 to get a prematch Scouting Report')
+    print('press 3 to get a single team report')
     selection = input('enter number: ')
     
     if selection == '1':
         event = input('enter event code: ')
         makeMatchList(event, 2017)
     elif selection == '2':
-        Team = input('enter team number: ')
-        if Team.isdigit():
-            Team = int(Team)
-        else:
-            print('input error')
-            return
+        Team = enterTeam()       
         ReadData = readScout()
         MatchList = readMatchList()
         TeamDf, PivotDf = TeamStats(ReadData)
+        #matchNum = FindPartners(MatchList, Team)
         MatchReport(MatchList, PivotDf, TeamDf, Team)
         
-    
+    elif selection == '3':
+        Team = enterTeam()       
+        ReadData = readScout()
+        MatchList = readMatchList()
+        TeamDf, PivotDf = TeamStats(ReadData)
+        SearchTeam(TeamDf, PivotDf, Team)
 Main()
-                      
+      
+                
                       
                      
 
