@@ -132,33 +132,29 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     (Scouting Data)->PivotTable with upcoming match partners
     Take the scouting data, trim down to only partners and opponents.
     Create a report by match showing partners and opponents.
-    '''     
-    #headers and our team
-    #print('Team', TeamNumber, 'MatchReport')
-    #print(PivotDf)
-    #print(Scoutdf.head())
-    #print()
+    '''
+    #if MatchList in readScout()
+     #   print(MatchList['allies'])
+    #index = pd.Index([MatchList])
+    #if 'allies' in index:
+    print(MatchList)
+    print(MatchList[0]['allies'])
+    LastScouted = max(Scoutdf['match'])
+    
+    for match in MatchList:
+        if match['match'] > LastScouted:
+            print('match', match['match'])
+            print('\nallies')
+            for ally in match['allies']:
+                SearchTeam(Scoutdf, PivotDf, ally)
+                print()
+            return
+    
+    
+    
 
-    #get only 1806 matchcount
-   # print(PivotDf['totalmatches'])
-    PivotDf.set_index('team', inplace = True) 
-    print('Matches Played =', PivotDf.at[TeamNumber, 'totalmatches'])
-    print('Average Auto Cubes =', PivotDf.at[TeamNumber, 'avgautocubes'])
-    print('Average Tele Cubes =', PivotDf.at[TeamNumber, 'avgtelecubes'])
-    print('Total climbs =', PivotDf.at[TeamNumber, 'totalclimbs'])
-    #arr = np.array(FindPartners(MatchList, TeamNumber))
-    #print(arr[matchNum])
     
     
-    
-    
-    #print('Comments', PivotDf.at[TeamNumber, 'PositiveComments'])
-    #print(PivotDf[PivotDf.team == TeamNumber]['avgautocubes'])
-    #print(PivotDf[PivotDf.team == TeamNumber]['avgtelecubes'])
-    #print(PivotDf[PivotDf.team == TeamNumber]['totalclimbs'])
-    #print(PivotDf['totalmatches', PivotDf.team == TeamNumber])
-    #SearchTeam(Scoutdf, PivotDf, TeamNumber)
-
 def Day1Report(Scoutdf):
     '''(dataframe)->None
     Take Scouting data and analyze it by creating a report that will be presented
@@ -171,6 +167,8 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber):
     A Search function where we can find a team and their specific stats.
     '''
    # print(PivotDf['totalmatches'])
+    print('Team:', TeamNumber)
+    PivotDf.reset_index(inplace = True)
     PivotDf.set_index('team', inplace = True)
     print('Matches Played =', PivotDf.loc[TeamNumber]['totalmatches'])
     
@@ -251,11 +249,12 @@ def Main():
         ReadData = readScout()
         MatchList = readMatchList()
         TeamDf, PivotDf = TeamStats(ReadData)
+        Partners = FindPartners(MatchList, Team)
         #matchNum = FindPartners(MatchList, Team)
-        MatchReport(MatchList, PivotDf, TeamDf, Team)
+        MatchReport(Partners, PivotDf, TeamDf, Team)
         
     elif selection == '3':
-        Team = enterTeam()       
+        Team = int(enterTeam())       
         ReadData = readScout()
         MatchList = readMatchList()
         TeamDf, PivotDf = TeamStats(ReadData)
