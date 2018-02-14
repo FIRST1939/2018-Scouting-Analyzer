@@ -147,6 +147,10 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
             print('\nallies')
             for ally in match['allies']:
                 SearchTeam(Scoutdf, PivotDf, ally)
+                print() 
+            print('\nopponents')
+            for oppo in match['opponents']:
+                SearchTeam(Scoutdf, PivotDf, oppo)
                 print()
             return
     
