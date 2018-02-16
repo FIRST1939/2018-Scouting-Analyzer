@@ -133,14 +133,10 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     Take the scouting data, trim down to only partners and opponents.
     Create a report by match showing partners and opponents.
     '''
-    #if MatchList in readScout()
-     #   print(MatchList['allies'])
-    #index = pd.Index([MatchList])
-    #if 'allies' in index:
+    
     print(MatchList)
     print(MatchList[0]['allies'])
     LastScouted = max(Scoutdf['match'])
-    
     for match in MatchList:
         if match['match'] > LastScouted:
             print('match', match['match'])
@@ -153,18 +149,31 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
                 SearchTeam(Scoutdf, PivotDf, oppo)
                 print()
             return
-    
+            ''' with open ('MatchReport.csv', 'w') as File:
+                for match in MatchList:
+                Outstr = str(match)
+                File.write(Outstr)
+                '''
     
     
 
     
     
-def Day1Report(Scoutdf):
+def Day1Report(Scoutdf, PivotDf):
     '''(dataframe)->None
     Take Scouting data and analyze it by creating a report that will be presented
     at the Day 1 Scouting meeting
     '''
-    pass
+    outfile = '1st Day report.xlsx'
+    with pd.ExcelWriter(outfile) as writer:
+        Scoutdf = Scoutdf.sort_values(by = 'team')   
+        tabname = 'Raw Data'
+        Scoutdf.to_excel(writer, tabname)
+        PivotDf = PivotDf.sort_values(by = 'team')
+        tabname = 'Data Table'
+        PivotDf.to_excel(writer, tabname)
+    print('Day1Report written to file')
+    
 
 def SearchTeam(Scoutdf, PivotDf, TeamNumber):
     '''
@@ -243,6 +252,7 @@ def Main():
     print('press 1 to acquire a Match List')
     print('press 2 to get a prematch Scouting Report')
     print('press 3 to get a single team report')
+    print('press 4 to get the Day 1 Match Report')
     selection = input('enter number: ')
     
     if selection == '1':
@@ -263,6 +273,10 @@ def Main():
         MatchList = readMatchList()
         TeamDf, PivotDf = TeamStats(ReadData)
         SearchTeam(TeamDf, PivotDf, Team)
+    elif selection == '4':
+        ReadData = readScout()
+        TeamDf, PivotDf = TeamStats(ReadData)
+        Day1Report(TeamDf, PivotDf)
 Main()
       
                 
