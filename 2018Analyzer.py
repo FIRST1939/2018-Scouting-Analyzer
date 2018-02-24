@@ -126,9 +126,34 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     with open(FileName, 'w') as File:
         File.write('<h2>Our Robot: ' + str(TeamNumber) + '</h2>\n')
         SearchTeam(Scoutdf, PivotDf, TeamNumber, File)
-        File.write(str(MatchList) + '\n')
+
         #print(MatchList[0]['allies'])
         LastScouted = max(Scoutdf['match'])
+        
+        # Prettying up the file output of the match list
+        File.write('<h3>Forthcoming Matches</h3>\n')        
+        
+        File.write('<table border="1" class="dataframe">\n  <thead>\n    <tr style="text-align: right;">\n')
+        File.write('      <th>Match</th>\n')
+        File.write('      <th>Alliance</th>\n')
+        File.write('      <th>Allies</th>\n')
+        File.write('      <th>Opponents</th>\n')
+        File.write('    </tr>\n  </thead>\n  <tbody>')
+
+        
+        for match in MatchList:
+            if match['match'] > LastScouted:
+                #File.write(str(match) + '\n')
+                File.write('    <tr style="text-align: right;">\n')
+                File.write('      <th>' + str(match['match']) + '</th>\n')
+                File.write('      <th>' + match['alliance'] + '</th>\n')
+                File.write('      <th>' + str(match['allies']) + '</th>\n')
+                File.write('      <th>' + str(match['opponents']) + '</th>\n')
+                File.write('    </tr>\n')                
+                File.write('\n')
+        File.write('</table>\n')
+        
+        #Printing reports for each forthcoming match
         for match in MatchList:
             if match['match'] > LastScouted:
                 File.write('<h2>Match ' + str(match['match']) + '</h2>\n')
@@ -136,7 +161,7 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
                 for ally in match['allies']:
                     SearchTeam(Scoutdf, PivotDf, ally, File)
                     File.write('\n') 
-                File.write('\nopponents\n')
+                File.write('\n<h3>Opponents</h3>\n')
                 for oppo in match['opponents']:
                     SearchTeam(Scoutdf, PivotDf, oppo, File)
                     File.write('\n')
@@ -180,14 +205,14 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         
         print(Scoutdf[Scoutdf.team == TeamNumber])
     else :
-        File.write('Team: ' + str(TeamNumber) + '\n')
+        File.write('<h4>Team: ' + str(TeamNumber) + '</h4>\n')
         PivotDf.reset_index(inplace = True)
         PivotDf.set_index('team', inplace = True)
         File.write('Matches Played =' + str(PivotDf.loc[TeamNumber]['totalmatches']) + '\n')
         
-        File.write('\nMatch Summary\n')
+        File.write('\n<h5>Match Summary</h5>\n')
         File.write(str(PivotDf.loc[TeamNumber]))
-        File.write('\nMatch Details\n')
+        File.write('\n<h5>Match Details<h5>\n')
         
         File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html())
         
