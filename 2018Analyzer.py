@@ -124,7 +124,14 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     '''
     FileName = 'MatchReport.htm'
     with open(FileName, 'w') as File:
-        File.write('<h2>Our Robot: ' + str(TeamNumber) + '</h2>\n')
+        File.write('<head>\n  <title>Pre-match scouting Report</title>\n')
+        File.write('<h1>Pre-match scouting Report</h1>\n')
+        File.write('</head>\n')
+        File.write('<body>\n')
+        
+        File.write('<div class="chapter">\n')
+        File.write('<hr>\n')
+        File.write('<h3>Our Robot' + '</h3>\n')
         SearchTeam(Scoutdf, PivotDf, TeamNumber, File)
 
         #print(MatchList[0]['allies'])
@@ -152,11 +159,14 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
                 File.write('    </tr>\n')                
                 File.write('\n')
         File.write('</table>\n')
-        
+        File.write('</div>\n')
         #Printing reports for each forthcoming match
         for match in MatchList:
             if match['match'] > LastScouted:
+                File.write('<div class="chapter">\n')
+                File.write('<hr>\n')
                 File.write('<h2>Match ' + str(match['match']) + '</h2>\n')
+                File.write('<hr>\n')
                 File.write('\n<h3>Allies</h3>\n')
                 for ally in match['allies']:
                     SearchTeam(Scoutdf, PivotDf, ally, File)
@@ -165,14 +175,15 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
                 for oppo in match['opponents']:
                     SearchTeam(Scoutdf, PivotDf, oppo, File)
                     File.write('\n')
+                File.write('</div>\n')
                 return
                 ''' with open ('MatchReport.csv', 'w') as File:
                     for match in MatchList:
                     Outstr = str(match)
                     File.write(Outstr)
                     '''
-
-    
+        File.write('</body>\n')    
+        
 def Day1Report(Scoutdf, PivotDf):
     '''(dataframe)->None
     Take Scouting data and analyze it by creating a report that will be presented
