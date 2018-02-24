@@ -124,14 +124,15 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     '''
     FileName = 'MatchReport.htm'
     with open(FileName, 'w') as File:
-        File.write('Our Robot:' + str(TeamNumber) + '\n')
+        File.write('<h2>Our Robot: ' + str(TeamNumber) + '</h2>\n')
+        SearchTeam(Scoutdf, PivotDf, TeamNumber, File)
         File.write(str(MatchList) + '\n')
-        print(MatchList[0]['allies'])
+        #print(MatchList[0]['allies'])
         LastScouted = max(Scoutdf['match'])
         for match in MatchList:
             if match['match'] > LastScouted:
-                File.write('match' + str(match['match']) + '\n')
-                File.write('\nallies\n')
+                File.write('<h2>Match ' + str(match['match']) + '</h2>\n')
+                File.write('\n<h3>Allies</h3>\n')
                 for ally in match['allies']:
                     SearchTeam(Scoutdf, PivotDf, ally, File)
                     File.write('\n') 
@@ -249,7 +250,8 @@ def Main():
     
     if selection == '1':
         event = input('enter event code: ')
-        makeMatchList(event, 2017)
+        makeMatchList(event)
+        
     elif selection == '2':
         Team = enterTeam()       
         ReadData = readScout()
