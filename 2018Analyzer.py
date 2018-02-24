@@ -8,7 +8,7 @@ import tbaUtils
 import pandas as pd
 import numpy as np
 from pprint import pprint
-
+from tkinter import filedialog
 def makeMatchList(event, year = 2018):
     '''
     Get match list from the Blue Alliance website depending on what event we're 
@@ -44,7 +44,7 @@ def makeMatchList(event, year = 2018):
     MatchList.sort()
     pprint(MatchList)    
 
-    with open('MatchList.csv', 'w') as File:
+    with open('MatchList-' + event + '.csv', 'w') as File:
         for Match in MatchList : 
             Outstr = str(Match).replace('[', '').replace(']', '').replace(' ', '')+'\n'
             File.write(Outstr)
@@ -54,8 +54,8 @@ def readMatchList():
     Read the Match List file created by makeMatchList.     
     
     '''
-    
-    with open('MatchList.csv', 'r') as Matchlist:
+    FileName = filedialog.askopenfilename(title = 'select MatchList file')
+    with open(FileName, 'r') as Matchlist:
        data = Matchlist.readlines()
    
    
@@ -76,7 +76,8 @@ def readScout():
     Read Scouting Data from a file, fix formatting to numeric where neccessary,
     clean the data, report any implausibile data.  
     '''
-    with open('fake-data-6-team.csv', 'r') as ScoutFile:
+    FileName = filedialog.askopenfilename(title = 'select Data file')
+    with open(FileName, 'r') as ScoutFile:
         ScoutData = pd.read_csv(ScoutFile, sep = '|') 
     Result = ScoutData.fillna(value = 0)
     return Result
@@ -121,27 +122,29 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     Take the scouting data, trim down to only partners and opponents.
     Create a report by match showing partners and opponents.
     '''
-    print('Our Robot:' , TeamNumber)
-    print(MatchList)
-    print(MatchList[0]['allies'])
-    LastScouted = max(Scoutdf['match'])
-    for match in MatchList:
-        if match['match'] > LastScouted:
-            print('match', match['match'])
-            print('\nallies')
-            for ally in match['allies']:
-                SearchTeam(Scoutdf, PivotDf, ally)
-                print() 
-            print('\nopponents')
-            for oppo in match['opponents']:
-                SearchTeam(Scoutdf, PivotDf, oppo)
-                print()
-            return
-            ''' with open ('MatchReport.csv', 'w') as File:
-                for match in MatchList:
-                Outstr = str(match)
-                File.write(Outstr)
-                '''
+    FileName = 'MatchReport.htm'
+    with open(FileName, 'w') as File:
+        File.write('Our Robot:' + str(TeamNumber) + '\n')
+        File.write(str(MatchList) + '\n')
+        print(MatchList[0]['allies'])
+        LastScouted = max(Scoutdf['match'])
+        for match in MatchList:
+            if match['match'] > LastScouted:
+                File.write('match' + str(match['match']) + '\n')
+                File.write('\nallies\n')
+                for ally in match['allies']:
+                    SearchTeam(Scoutdf, PivotDf, ally, File)
+                    File.write('\n') 
+                File.write('\nopponents\n')
+                for oppo in match['opponents']:
+                    SearchTeam(Scoutdf, PivotDf, oppo, File)
+                    File.write('\n')
+                return
+                ''' with open ('MatchReport.csv', 'w') as File:
+                    for match in MatchList:
+                    Outstr = str(match)
+                    File.write(Outstr)
+                    '''
 
     
 def Day1Report(Scoutdf, PivotDf):
@@ -160,23 +163,32 @@ def Day1Report(Scoutdf, PivotDf):
     print('Day1Report written to file')
     
 
-def SearchTeam(Scoutdf, PivotDf, TeamNumber):
+def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
     '''
     A Search function where we can find a team and their specific stats.
     '''
-   # print(PivotDf['totalmatches'])
-    print('Team:', TeamNumber)
-    PivotDf.reset_index(inplace = True)
-    PivotDf.set_index('team', inplace = True)
-    print('Matches Played =', PivotDf.loc[TeamNumber]['totalmatches'])
-    
-    print('\nMatch Summary')
-    print(PivotDf.loc[TeamNumber])
-    print('\nMatch Details')
-    
-   #print(PivotDf[PivotDf.team == TeamNumber]['PositiveComments'])
-    print(Scoutdf[Scoutdf.team == TeamNumber])
-
+    if File == None:
+        print('Team:', TeamNumber)
+        PivotDf.reset_index(inplace = True)
+        PivotDf.set_index('team', inplace = True)
+        print('Matches Played =', PivotDf.loc[TeamNumber]['totalmatches'])
+        
+        print('\nMatch Summary')
+        print(PivotDf.loc[TeamNumber])
+        print('\nMatch Details')
+        
+        print(Scoutdf[Scoutdf.team == TeamNumber])
+    else :
+        File.write('Team: ' + str(TeamNumber) + '\n')
+        PivotDf.reset_index(inplace = True)
+        PivotDf.set_index('team', inplace = True)
+        File.write('Matches Played =' + str(PivotDf.loc[TeamNumber]['totalmatches']) + '\n')
+        
+        File.write('\nMatch Summary\n')
+        File.write(str(PivotDf.loc[TeamNumber]))
+        File.write('\nMatch Details\n')
+        
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html())
         
 def TeamStats(TeamDf):
     '''
