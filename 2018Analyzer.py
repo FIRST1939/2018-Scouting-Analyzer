@@ -44,16 +44,14 @@ def makeMatchList(event, year = 2018):
     MatchList.sort()
     pprint(MatchList)    
 
-
     with open('MatchList.csv', 'w') as File:
         for Match in MatchList : 
             Outstr = str(Match).replace('[', '').replace(']', '').replace(' ', '')+'\n'
             File.write(Outstr)
 
-def readMatchList():
-    
+def readMatchList():    
     '''
-    Read the Match List file created by makeMatchList. 
+    Read the Match List file created by makeMatchList.     
     
     '''
     
@@ -67,22 +65,12 @@ def readMatchList():
         dataresult = line.split(',')
         for idx in range(len(dataresult)):
             dataresult[idx] = int(dataresult[idx])
-            
+        print(dataresult)
         result.append(dataresult)
         
     return result
 
-'''
-def readTeamMatches(TeamNumber):
-    data = FindPartners(readMatchList(), TeamNumber)
-    output = []
-    for i in range(0, len(data)):
-        matchData = data[i]
-        print(matchData, type(matchData))
-        match = matchData['3']
-        output.append(match)
-    return output
-'''
+
 def readScout():
     '''
     Read Scouting Data from a file, fix formatting to numeric where neccessary,
@@ -94,8 +82,7 @@ def readScout():
     return Result
     
 
-def FindPartners(Matchlist, team = 1939):
-    
+def FindPartners(Matchlist, team = 1939):    
     '''
     Takes the Match List from the entire competition and finds the matches we're
     in and finds the teams that are with us.
@@ -126,6 +113,7 @@ def FindPartners(Matchlist, team = 1939):
             result.append(thisMatch)
             
     return result
+
             
 def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     ''' (dataframe)->dataframe
@@ -133,7 +121,7 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     Take the scouting data, trim down to only partners and opponents.
     Create a report by match showing partners and opponents.
     '''
-    
+    print('Our Robot:' , TeamNumber)
     print(MatchList)
     print(MatchList[0]['allies'])
     LastScouted = max(Scoutdf['match'])
@@ -154,10 +142,7 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
                 Outstr = str(match)
                 File.write(Outstr)
                 '''
-    
-    
 
-    
     
 def Day1Report(Scoutdf, PivotDf):
     '''(dataframe)->None
@@ -191,11 +176,8 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber):
     
    #print(PivotDf[PivotDf.team == TeamNumber]['PositiveComments'])
     print(Scoutdf[Scoutdf.team == TeamNumber])
-    
-    
-    
-    
-    
+
+        
 def TeamStats(TeamDf):
     '''
     Takes full dataframe, and creates per match calculated values. Creates a pivot
@@ -227,10 +209,8 @@ def TeamStats(TeamDf):
 
     TeamPivot = pd.merge(AvgTeamPivot, MatchCount, on = 'team')
     
-   
-
-    
     return TeamDf, TeamPivot
+
 
 def PickList():
     '''
@@ -247,7 +227,7 @@ def enterTeam():
      else:
         print('input error')
         return
-    
+
 def Main():
     print('press 1 to acquire a Match List')
     print('press 2 to get a prematch Scouting Report')
