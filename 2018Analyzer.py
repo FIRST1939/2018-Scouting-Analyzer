@@ -125,13 +125,13 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     FileName = 'MatchReport.htm'
     with open(FileName, 'w') as File:
         File.write('<head>\n  <title>Pre-match scouting Report</title><br>\n')
-        File.write('<link rel="icon" href="RoboticsAvatar2018.png" />')        
+        File.write('<link rel="icon" href="RoboticsAvatar2018.png" />') 
+        File.write('<link rel="stylesheet" type="text/css" href="matchrep.css">')
         File.write('</head>\n')
         File.write('<body>\n')
-        File.write('<h1><img src="8bit_logo.jpg", width=50, height=50>')
+        File.write('<h1><img src="8bit_logo.jpg", width=50, height=60>')
         File.write('Pre-match scouting Report</h1>\n')
-        File.write('<div class="chapter">\n')
-        File.write('<hr>\n')
+        File.write('<div class="robot">\n')
         File.write('<h3>Our Robot' + '</h3>\n')
         SearchTeam(Scoutdf, PivotDf, TeamNumber, File)
 
@@ -153,7 +153,7 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
             if match['match'] > LastScouted:
                 #File.write(str(match) + '\n')
                 File.write('    <tr style="text-align: right;">\n')
-                File.write('      <th>' + str(match['match']) + '</th>\n')
+                File.write('      <th><a href=#Match' + str(match['match']) + '>' + str(match['match']) + '</a></th>\n')
                 File.write('      <th>' + match['alliance'] + '</th>\n')
                 File.write('      <th>' + str(match['allies']) + '</th>\n')
                 File.write('      <th>' + str(match['opponents']) + '</th>\n')
@@ -165,9 +165,8 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
         for match in MatchList:
             if match['match'] > LastScouted:
                 File.write('<div class="chapter">\n')
-                File.write('<hr>\n')
+                File.write('<a name=Match' + str(match['match']) + '></a>\n')
                 File.write('<h2>Match ' + str(match['match']) + '</h2>\n')
-                File.write('<hr>\n')
                 File.write('\n<h3>Allies</h3>\n')
                 for ally in match['allies']:
                     SearchTeam(Scoutdf, PivotDf, ally, File)
@@ -236,7 +235,7 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         
         File.write('\n<h5>Match Summary</h5>\n')
         File.write(str(PivotDf.loc[TeamNumber]))
-        File.write('\n<h5>Match Details<h5>\n')
+        File.write('\n<h5>Match Details</h5>\n')
 
         # Make pandas stop truncating the long text fields.
         pd.set_option('display.max_colwidth', -1)
@@ -245,7 +244,7 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         # decimal places, and suppressing printing of the index number
         
         # Comments        
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 35, 36], float_format='{0:.0f}'.format, index=False))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 35, 36], float_format='{0:.0f}'.format, index=False, justify='unset'))
         File.write('\n<br>\n')        
         
         # Calculated Fields
@@ -265,7 +264,7 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         
         # Teleop Columns
         # Cube Moving
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 15, 16, 17, 18, 19, 20, 21], float_format='{0:.0f}'.format, index=False))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 15, 16, 18, 19, 20, 21], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
         
         # Climbing and Parking
