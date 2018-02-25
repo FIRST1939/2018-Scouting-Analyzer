@@ -124,10 +124,12 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     '''
     FileName = 'MatchReport.htm'
     with open(FileName, 'w') as File:
-        File.write('<head>\n  <title>Pre-match scouting Report</title><br>\n')        
+        File.write('<head>\n  <title>Pre-match scouting Report</title><br>\n')
+        File.write('<link rel="icon" href="RoboticsAvatar2018.png" />')        
         File.write('</head>\n')
         File.write('<body>\n')
-        File.write('<h1>Pre-match scouting Report</h1>\n')
+        File.write('<h1><img src="8bit_logo.jpg", width=50, height=50>')
+        File.write('Pre-match scouting Report</h1>\n')
         File.write('<div class="chapter">\n')
         File.write('<hr>\n')
         File.write('<h3>Our Robot' + '</h3>\n')
@@ -236,36 +238,42 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         File.write(str(PivotDf.loc[TeamNumber]))
         File.write('\n<h5>Match Details<h5>\n')
 
+        # Make pandas stop truncating the long text fields.
+        pd.set_option('display.max_colwidth', -1)
+        
+        # Within each write, I'm specifying columns by number, taking off the
+        # decimal places, and suppressing printing of the index number
+        
         # Comments        
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 35, 36], float_format='{0:.0f}'.format))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 35, 36], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')        
         
         # Calculated Fields
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 37, 38, 39], float_format='{0:.0f}'.format))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 37, 38, 39], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')        
         
         # Auton columns
         # Good stuff
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 4, 6, 10, 14], float_format='{0:.0f}'.format))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 4, 6, 10, 14], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
         # Failed Stuff
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 3, 5, 9, 13], float_format='{0:.0f}'.format))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 3, 5, 9, 13], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
         # Own Goals
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 7, 8, 11, 12], float_format='{0:.0f}'.format))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 7, 8, 11, 12], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
         
         # Teleop Columns
         # Cube Moving
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 15, 16, 17, 18, 19, 20, 21], float_format='{0:.0f}'.format))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 15, 16, 17, 18, 19, 20, 21], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
         
         # Climbing and Parking
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 29, 30, 31, 32, 33, 34], float_format='{0:.0f}'.format))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 29, 30, 31, 32, 33, 34], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
                 
         # Bad Stuff
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 22, 23, 24, 25, 26, 27, 28], float_format='{0:.0f}'.format))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 22, 23, 24, 25, 26, 27, 28], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
 
         
