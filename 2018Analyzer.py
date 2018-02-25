@@ -176,7 +176,7 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
                     SearchTeam(Scoutdf, PivotDf, oppo, File)
                     File.write('\n')
                 File.write('</div>\n')
-                return
+
                 ''' with open ('MatchReport.csv', 'w') as File:
                     for match in MatchList:
                     Outstr = str(match)
@@ -206,6 +206,11 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
     '''
     if File == None:
         print('Team:', TeamNumber)
+        
+        if TeamNumber not in PivotDf.team.values:
+            print('Team', TeamNumber, 'is not yet scouted')
+            return
+            
         PivotDf.reset_index(inplace = True)
         PivotDf.set_index('team', inplace = True)
         print('Matches Played =', PivotDf.loc[TeamNumber]['totalmatches'])
@@ -217,7 +222,14 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         print(Scoutdf[Scoutdf.team == TeamNumber])
     else :
         File.write('<h4>Team: ' + str(TeamNumber) + '</h4>\n')
+
         PivotDf.reset_index(inplace = True)
+                
+        if TeamNumber not in PivotDf.team.values:
+            File.write('\nTeam ' + str(TeamNumber) + ' is not yet scouted\n')
+            PivotDf.set_index('team', inplace = True)
+            return
+            
         PivotDf.set_index('team', inplace = True)
         File.write('Matches Played =' + str(PivotDf.loc[TeamNumber]['totalmatches']) + '\n')
         
