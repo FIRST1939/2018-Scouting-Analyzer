@@ -168,15 +168,19 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
                 File.write('<a name=Match' + str(match['match']) + '></a>\n')
                 File.write('<h2>Match ' + str(match['match']) + '</h2>\n')
                                                                
+                #print(len(PivotDf.columns))
                 us = [TeamNumber]+match['allies']
-                them = match['opponents'] 
-                print(PivotDf.head())
+                them = match['opponents']                 
                 File.write('<h4>'+ match['alliance']+' Alliance</h4>\n')
-                File.write(PivotDf.loc[us].to_html())
-                File.write('<h4>'+ match['opposing']+' Alliance</h4>\n')
-                print(PivotDf.index.values)
                 if any(i in them for i in PivotDf.index.values):
-                    File.write(PivotDf.loc[them].to_html())
+                    File.write(PivotDf.loc[us].to_html(float_format='{0:.2f}'.format))
+                else:
+                    File.write('Data not available\n')
+                File.write('<h4>'+ match['opposing']+' Alliance</h4>\n')               
+                if any(i in them for i in PivotDf.index.values):                    
+                    File.write(PivotDf.loc[them].to_html(float_format='{0:.2f}'.format))
+                else:
+                    File.write('Data not available\n')
                 
                 File.write('\n<h3>Allies</h3>\n')
                 for ally in match['allies']:
@@ -204,10 +208,10 @@ def Day1Report(Scoutdf, PivotDf):
     with pd.ExcelWriter(outfile) as writer:
         Scoutdf = Scoutdf.sort_values(by = 'team')   
         tabname = 'Raw Data'
-        Scoutdf.to_excel(writer, tabname)
+        Scoutdf.to_excel(writer, tabname, index=False)
         PivotDf = PivotDf.sort_values(by = 'team')
         tabname = 'Data Table'
-        PivotDf.to_excel(writer, tabname)
+        PivotDf.to_excel(writer, tabname, index=False)
     print('Day1Report written to file')
     
 
@@ -227,7 +231,7 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         print('Matches Played =', PivotDf.loc[TeamNumber]['totalmatches'])
         
         print('\nMatch Summary')
-        print(PivotDf.loc[TeamNumber])
+        print(PivotDf.loc[TeamNumber].to_dict())
         print('\nMatch Details')
         
         print(Scoutdf[Scoutdf.team == TeamNumber])
@@ -245,7 +249,10 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         File.write('Matches Played =' + str(PivotDf.loc[TeamNumber]['totalmatches']) + '\n')
         
         File.write('\n<h5>Match Summary</h5>\n')
-        File.write(str(PivotDf.loc[TeamNumber]))
+        temp = PivotDf.loc[TeamNumber].to_dict()
+        if 'index' in temp:
+            del temp['index']
+        File.write(str(temp))
         File.write('\n<h5>Match Details</h5>\n')
 
         # Make pandas stop truncating the long text fields.
@@ -324,6 +331,7 @@ def TeamStats(TeamDf):
     climbDf = pd.pivot_table(tempDf,values=['endClimbedType'],index=['team'],
                              columns='endClimbedType',aggfunc=len,fill_value=0)
     print(climbDf)
+    climbDf.reset_index(inplace = True)
     
     #TeamDf['PostiveComments'] = TeamDf['postCommentsPro'] 
     
@@ -338,6 +346,12 @@ def TeamStats(TeamDf):
     #Comments.reset_index(inplace = True)
 
     TeamPivot = pd.merge(AvgTeamPivot, MatchCount, on = 'team')
+    
+    TeamPivot = pd.merge(TeamPivot, climbDf, on='team')
+    
+    TeamPivot.rename(columns = {"Did not Try": 'Climb_Untried', "Center": 'Climb_Center', 
+                                "Side": 'Climb_Side', "Used Ramp": 'Climb_Ramp',
+                                "Failed": 'Climb_Fail', "Attempt": 'Climb_Attempt'}, inplace = True)
     
     return TeamDf, TeamPivot
 
