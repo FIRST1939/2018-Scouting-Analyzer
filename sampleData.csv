@@ -1,0 +1,5 @@
+id|matchNo|teamNo|autoCrossLineTry|autoCrossLineSuccess|autoBoxToSwitchTry|autoBoxToSwitchCount|autoBoxToWrongSwitchTry|autoBoxToWrongSwitchCount|autoBoxToScaleTry|autoBoxToScaleCount|autoBoxToWrongScaleTry|autoBoxToWrongScaleCount|autoEndWithNewCube|teleBoxToSwitchCount|teleBoxToScaleCount|teleBoxToOpponentSwitchCount|teleBoxToExchangeCount|teleDroppedBoxCount|teleDefenseType|tippedBot|deadBot|recoveredTippedBot|recoveredDeadBot|penaltyStandardFoul|penaltyTechnicalFoul|penaltyYellowCard|penaltyRedCard|endParked|endClimbedType|endClimbedRampSingle|endClimbedRampDouble|endClimbedExtendBar|endCubeAttainment|endScoringAbility|postComments
+
+1|"1"|1810|1|1|1|1|0|0|1|0|0|0|0|3|2|1|0|2|"less than 30 secs"|0|0|0|0|0|0|0|0|1|"Did Not Try"|0|0|0|"Picked up cubes from ground"|"Can score on high scale"|"Overall a pleasant little bot with a good beat. I could dance to it.
+"
+2|"1"|1939|1|1|1|1|0|0|1|0|0|0|0|2|2|0|2|4|"less than 30 secs"|0|0|0|0|1|0|0|0|1|"Center"|0|0|0|"Picked up cubes from ground"|"Can score on high scale"|"While a good all-around bot, it does list slightly to starboard."

@@ -12,7 +12,6 @@ Matches Played =3.0
 index           1.000000
 avgautocubes    0.666667
 avgtelecubes    9.000000
-totalclimbs     0.000000
 totalmatches    3.000000
 Name: 1806, dtype: float64
 <h5>Match Details</h5>
@@ -21,8 +20,7 @@ Name: 1806, dtype: float64
     <tr style="text-align: unset;">
       <th>match</th>
       <th>team</th>
-      <th>postCommentsPro</th>
-      <th>postCommentsCon</th>
+      <th>postComments</th>
     </tr>
   </thead>
   <tbody>
@@ -30,19 +28,16 @@ Name: 1806, dtype: float64
       <td>9</td>
       <td>1806</td>
       <td>This robot is kind of snazzy</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>17</td>
       <td>1806</td>
-      <td>Robot did all the things</td>
-      <td>Failed a climb, also caught fire</td>
+      <td>Robot did all the things . Failed a climb, also caught fire</td>
     </tr>
     <tr>
       <td>23</td>
       <td>1806</td>
       <td>Auton improving, 100% less fire this match</td>
-      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -54,7 +49,7 @@ Name: 1806, dtype: float64
       <th>team</th>
       <th>avgtelecubes</th>
       <th>avgautocubes</th>
-      <th>totalclimbs</th>
+      <th>totalmatches</th>
     </tr>
   </thead>
   <tbody>
@@ -63,21 +58,21 @@ Name: 1806, dtype: float64
       <td>1806</td>
       <td>8</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>17</td>
       <td>1806</td>
       <td>9</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>23</td>
       <td>1806</td>
       <td>10</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -90,7 +85,7 @@ Name: 1806, dtype: float64
       <th>autoCrossLineSuccess</th>
       <th>autoBoxToSwitchCount</th>
       <th>autoBoxToScaleCount</th>
-      <th>autoBoxPickupCount</th>
+      <th>teleBoxToSwitchCount</th>
     </tr>
   </thead>
   <tbody>
@@ -100,7 +95,7 @@ Name: 1806, dtype: float64
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>5</td>
     </tr>
     <tr>
       <td>17</td>
@@ -108,7 +103,7 @@ Name: 1806, dtype: float64
       <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
+      <td>8</td>
     </tr>
     <tr>
       <td>23</td>
@@ -116,7 +111,7 @@ Name: 1806, dtype: float64
       <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -129,7 +124,7 @@ Name: 1806, dtype: float64
       <th>autoCrossLineTry</th>
       <th>autoBoxToSwitchTry</th>
       <th>autoBoxToScaleTry</th>
-      <th>autoBoxPickupTry</th>
+      <th>autoEndWithNewCube</th>
     </tr>
   </thead>
   <tbody>
@@ -155,7 +150,7 @@ Name: 1806, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -209,7 +204,6 @@ Name: 1806, dtype: float64
       <th>teleBoxToOpponentSwitchCount</th>
       <th>teleBoxToExchangeCount</th>
       <th>teleDroppedBoxCount</th>
-      <th>teleDefenseBlockCount</th>
     </tr>
   </thead>
   <tbody>
@@ -221,7 +215,6 @@ Name: 1806, dtype: float64
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>17</td>
@@ -231,7 +224,6 @@ Name: 1806, dtype: float64
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>23</td>
@@ -240,6 +232,44 @@ Name: 1806, dtype: float64
       <td>4</td>
       <td>0</td>
       <td>2</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>match</th>
+      <th>team</th>
+      <th>endClimbedType</th>
+      <th>endClimbedRampSingle</th>
+      <th>endClimbedRampDouble</th>
+      <th>endClimbedExtendBar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>9</td>
+      <td>1806</td>
+      <td>Didn't Try</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>1806</td>
+      <td>Failed</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>1806</td>
+      <td>Center</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -251,44 +281,32 @@ Name: 1806, dtype: float64
     <tr style="text-align: right;">
       <th>match</th>
       <th>team</th>
-      <th>endParked</th>
-      <th>endClimbedCenter</th>
-      <th>endClimbedSide</th>
-      <th>endClimbedRamp</th>
-      <th>endDeployRampTry</th>
-      <th>endDeployRamp</th>
+      <th>teleDefenseType</th>
+      <th>endCubeAttainment</th>
+      <th>endScoringAbility</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>9</td>
       <td>1806</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>medium scale</td>
     </tr>
     <tr>
       <td>17</td>
       <td>1806</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>switch</td>
     </tr>
     <tr>
       <td>23</td>
       <td>1806</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>high scale</td>
     </tr>
   </tbody>
 </table>
@@ -300,10 +318,11 @@ Name: 1806, dtype: float64
       <th>team</th>
       <th>tippedBot</th>
       <th>deadBot</th>
-      <th>recoveredBot</th>
-      <th>penaltyStandardFoulCount</th>
-      <th>penaltyTechnicalFoulCount</th>
-      <th>penaltyYellowCardCount</th>
+      <th>recoveredTippedBot</th>
+      <th>recoveredDeadBot</th>
+      <th>penaltyStandardFoul</th>
+      <th>penaltyTechnicalFoul</th>
+      <th>penaltyYellowCard</th>
       <th>penaltyRedCard</th>
     </tr>
   </thead>
@@ -318,6 +337,7 @@ Name: 1806, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>17</td>
@@ -329,10 +349,12 @@ Name: 1806, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>23</td>
       <td>1806</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -401,7 +423,89 @@ Name: 1806, dtype: float64
 <div class="chapter">
 <a name=Match34></a>
 <h2>Match 34</h2>
-
+<h4>blue Alliance</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>avgautocubes</th>
+      <th>avgtelecubes</th>
+      <th>totalmatches</th>
+    </tr>
+    <tr>
+      <th>team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1806</th>
+      <td>1</td>
+      <td>0.666667</td>
+      <td>9.000000</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2461</th>
+      <td>3</td>
+      <td>0.000000</td>
+      <td>2.333333</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2354</th>
+      <td>2</td>
+      <td>0.666667</td>
+      <td>3.666667</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table><h4>red Alliance</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>avgautocubes</th>
+      <th>avgtelecubes</th>
+      <th>totalmatches</th>
+    </tr>
+    <tr>
+      <th>team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4933</th>
+      <td>4</td>
+      <td>0.0</td>
+      <td>2.666667</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5212</th>
+      <td>5</td>
+      <td>0.0</td>
+      <td>3.000000</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>0</td>
+      <td>1.0</td>
+      <td>3.333333</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
 <h3>Allies</h3>
 <h4>Team: 2461</h4>
 Matches Played =3.0
@@ -410,7 +514,6 @@ Matches Played =3.0
 index           3.000000
 avgautocubes    0.000000
 avgtelecubes    2.333333
-totalclimbs     1.000000
 totalmatches    3.000000
 Name: 2461, dtype: float64
 <h5>Match Details</h5>
@@ -419,28 +522,24 @@ Name: 2461, dtype: float64
     <tr style="text-align: unset;">
       <th>match</th>
       <th>team</th>
-      <th>postCommentsPro</th>
-      <th>postCommentsCon</th>
+      <th>postComments</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>6</td>
       <td>2461</td>
-      <td>0</td>
       <td>No box manipulator, ramp collapsed</td>
     </tr>
     <tr>
       <td>19</td>
       <td>2461</td>
-      <td>0</td>
       <td>Ramp deployed prematurely into opponent null territory and hit opponent robot</td>
     </tr>
     <tr>
       <td>27</td>
       <td>2461</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Pushing cubes around with the bumpers</td>
     </tr>
   </tbody>
 </table>
@@ -452,7 +551,7 @@ Name: 2461, dtype: float64
       <th>team</th>
       <th>avgtelecubes</th>
       <th>avgautocubes</th>
-      <th>totalclimbs</th>
+      <th>totalmatches</th>
     </tr>
   </thead>
   <tbody>
@@ -461,14 +560,14 @@ Name: 2461, dtype: float64
       <td>2461</td>
       <td>2</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>19</td>
       <td>2461</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>27</td>
@@ -488,7 +587,7 @@ Name: 2461, dtype: float64
       <th>autoCrossLineSuccess</th>
       <th>autoBoxToSwitchCount</th>
       <th>autoBoxToScaleCount</th>
-      <th>autoBoxPickupCount</th>
+      <th>teleBoxToSwitchCount</th>
     </tr>
   </thead>
   <tbody>
@@ -527,7 +626,7 @@ Name: 2461, dtype: float64
       <th>autoCrossLineTry</th>
       <th>autoBoxToSwitchTry</th>
       <th>autoBoxToScaleTry</th>
-      <th>autoBoxPickupTry</th>
+      <th>autoEndWithNewCube</th>
     </tr>
   </thead>
   <tbody>
@@ -607,7 +706,6 @@ Name: 2461, dtype: float64
       <th>teleBoxToOpponentSwitchCount</th>
       <th>teleBoxToExchangeCount</th>
       <th>teleDroppedBoxCount</th>
-      <th>teleDefenseBlockCount</th>
     </tr>
   </thead>
   <tbody>
@@ -619,7 +717,6 @@ Name: 2461, dtype: float64
       <td>0</td>
       <td>2</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>19</td>
@@ -629,7 +726,6 @@ Name: 2461, dtype: float64
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>27</td>
@@ -638,7 +734,6 @@ Name: 2461, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>4</td>
-      <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -649,31 +744,25 @@ Name: 2461, dtype: float64
     <tr style="text-align: right;">
       <th>match</th>
       <th>team</th>
-      <th>endParked</th>
-      <th>endClimbedCenter</th>
-      <th>endClimbedSide</th>
-      <th>endClimbedRamp</th>
-      <th>endDeployRampTry</th>
-      <th>endDeployRamp</th>
+      <th>endClimbedType</th>
+      <th>endClimbedRampSingle</th>
+      <th>endClimbedRampDouble</th>
+      <th>endClimbedExtendBar</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>6</td>
       <td>2461</td>
+      <td>Failed</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
       <td>0</td>
     </tr>
     <tr>
       <td>19</td>
       <td>2461</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Failed</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -681,12 +770,45 @@ Name: 2461, dtype: float64
     <tr>
       <td>27</td>
       <td>2461</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't Try</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>match</th>
+      <th>team</th>
+      <th>teleDefenseType</th>
+      <th>endCubeAttainment</th>
+      <th>endScoringAbility</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>6</td>
+      <td>2461</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>exchange</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>2461</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>exchange</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>2461</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>exchange</td>
     </tr>
   </tbody>
 </table>
@@ -698,10 +820,11 @@ Name: 2461, dtype: float64
       <th>team</th>
       <th>tippedBot</th>
       <th>deadBot</th>
-      <th>recoveredBot</th>
-      <th>penaltyStandardFoulCount</th>
-      <th>penaltyTechnicalFoulCount</th>
-      <th>penaltyYellowCardCount</th>
+      <th>recoveredTippedBot</th>
+      <th>recoveredDeadBot</th>
+      <th>penaltyStandardFoul</th>
+      <th>penaltyTechnicalFoul</th>
+      <th>penaltyYellowCard</th>
       <th>penaltyRedCard</th>
     </tr>
   </thead>
@@ -716,10 +839,12 @@ Name: 2461, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>19</td>
       <td>2461</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -731,6 +856,7 @@ Name: 2461, dtype: float64
     <tr>
       <td>27</td>
       <td>2461</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -750,7 +876,6 @@ Matches Played =3.0
 index           2.000000
 avgautocubes    0.666667
 avgtelecubes    3.666667
-totalclimbs     0.000000
 totalmatches    3.000000
 Name: 2354, dtype: float64
 <h5>Match Details</h5>
@@ -759,27 +884,23 @@ Name: 2354, dtype: float64
     <tr style="text-align: unset;">
       <th>match</th>
       <th>team</th>
-      <th>postCommentsPro</th>
-      <th>postCommentsCon</th>
+      <th>postComments</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>8</td>
       <td>2354</td>
-      <td>0</td>
       <td>Technician coaching</td>
     </tr>
     <tr>
       <td>13</td>
       <td>2354</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>26</td>
       <td>2354</td>
-      <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -792,7 +913,7 @@ Name: 2354, dtype: float64
       <th>team</th>
       <th>avgtelecubes</th>
       <th>avgautocubes</th>
-      <th>totalclimbs</th>
+      <th>totalmatches</th>
     </tr>
   </thead>
   <tbody>
@@ -801,21 +922,21 @@ Name: 2354, dtype: float64
       <td>2354</td>
       <td>2</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>13</td>
       <td>2354</td>
       <td>5</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>26</td>
       <td>2354</td>
       <td>4</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -828,7 +949,7 @@ Name: 2354, dtype: float64
       <th>autoCrossLineSuccess</th>
       <th>autoBoxToSwitchCount</th>
       <th>autoBoxToScaleCount</th>
-      <th>autoBoxPickupCount</th>
+      <th>teleBoxToSwitchCount</th>
     </tr>
   </thead>
   <tbody>
@@ -838,7 +959,7 @@ Name: 2354, dtype: float64
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <td>13</td>
@@ -867,7 +988,7 @@ Name: 2354, dtype: float64
       <th>autoCrossLineTry</th>
       <th>autoBoxToSwitchTry</th>
       <th>autoBoxToScaleTry</th>
-      <th>autoBoxPickupTry</th>
+      <th>autoEndWithNewCube</th>
     </tr>
   </thead>
   <tbody>
@@ -947,7 +1068,6 @@ Name: 2354, dtype: float64
       <th>teleBoxToOpponentSwitchCount</th>
       <th>teleBoxToExchangeCount</th>
       <th>teleDroppedBoxCount</th>
-      <th>teleDefenseBlockCount</th>
     </tr>
   </thead>
   <tbody>
@@ -959,7 +1079,6 @@ Name: 2354, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>13</td>
@@ -969,7 +1088,6 @@ Name: 2354, dtype: float64
       <td>4</td>
       <td>1</td>
       <td>1</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>26</td>
@@ -977,6 +1095,44 @@ Name: 2354, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>4</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>match</th>
+      <th>team</th>
+      <th>endClimbedType</th>
+      <th>endClimbedRampSingle</th>
+      <th>endClimbedRampDouble</th>
+      <th>endClimbedExtendBar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>8</td>
+      <td>2354</td>
+      <td>Didn't Try</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>2354</td>
+      <td>Didn't Try</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>2354</td>
+      <td>Didn't Try</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -989,44 +1145,32 @@ Name: 2354, dtype: float64
     <tr style="text-align: right;">
       <th>match</th>
       <th>team</th>
-      <th>endParked</th>
-      <th>endClimbedCenter</th>
-      <th>endClimbedSide</th>
-      <th>endClimbedRamp</th>
-      <th>endDeployRampTry</th>
-      <th>endDeployRamp</th>
+      <th>teleDefenseType</th>
+      <th>endCubeAttainment</th>
+      <th>endScoringAbility</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>8</td>
       <td>2354</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>exchange/portal</td>
+      <td>switch</td>
     </tr>
     <tr>
       <td>13</td>
       <td>2354</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>exchange/portal</td>
+      <td>exchange</td>
     </tr>
     <tr>
       <td>26</td>
       <td>2354</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>exchange/portal</td>
+      <td>switch</td>
     </tr>
   </tbody>
 </table>
@@ -1038,10 +1182,11 @@ Name: 2354, dtype: float64
       <th>team</th>
       <th>tippedBot</th>
       <th>deadBot</th>
-      <th>recoveredBot</th>
-      <th>penaltyStandardFoulCount</th>
-      <th>penaltyTechnicalFoulCount</th>
-      <th>penaltyYellowCardCount</th>
+      <th>recoveredTippedBot</th>
+      <th>recoveredDeadBot</th>
+      <th>penaltyStandardFoul</th>
+      <th>penaltyTechnicalFoul</th>
+      <th>penaltyYellowCard</th>
       <th>penaltyRedCard</th>
     </tr>
   </thead>
@@ -1051,6 +1196,7 @@ Name: 2354, dtype: float64
       <td>2354</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1067,10 +1213,12 @@ Name: 2354, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>26</td>
       <td>2354</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1092,7 +1240,6 @@ Matches Played =3.0
 index           4.000000
 avgautocubes    0.000000
 avgtelecubes    2.666667
-totalclimbs     0.000000
 totalmatches    3.000000
 Name: 4933, dtype: float64
 <h5>Match Details</h5>
@@ -1101,8 +1248,7 @@ Name: 4933, dtype: float64
     <tr style="text-align: unset;">
       <th>match</th>
       <th>team</th>
-      <th>postCommentsPro</th>
-      <th>postCommentsCon</th>
+      <th>postComments</th>
     </tr>
   </thead>
   <tbody>
@@ -1110,18 +1256,15 @@ Name: 4933, dtype: float64
       <td>3</td>
       <td>4933</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>14</td>
       <td>4933</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>25</td>
       <td>4933</td>
-      <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1134,7 +1277,7 @@ Name: 4933, dtype: float64
       <th>team</th>
       <th>avgtelecubes</th>
       <th>avgautocubes</th>
-      <th>totalclimbs</th>
+      <th>totalmatches</th>
     </tr>
   </thead>
   <tbody>
@@ -1143,21 +1286,21 @@ Name: 4933, dtype: float64
       <td>4933</td>
       <td>4</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>14</td>
       <td>4933</td>
       <td>3</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>25</td>
       <td>4933</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -1170,7 +1313,7 @@ Name: 4933, dtype: float64
       <th>autoCrossLineSuccess</th>
       <th>autoBoxToSwitchCount</th>
       <th>autoBoxToScaleCount</th>
-      <th>autoBoxPickupCount</th>
+      <th>teleBoxToSwitchCount</th>
     </tr>
   </thead>
   <tbody>
@@ -1180,7 +1323,7 @@ Name: 4933, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <td>14</td>
@@ -1188,7 +1331,7 @@ Name: 4933, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>25</td>
@@ -1209,7 +1352,7 @@ Name: 4933, dtype: float64
       <th>autoCrossLineTry</th>
       <th>autoBoxToSwitchTry</th>
       <th>autoBoxToScaleTry</th>
-      <th>autoBoxPickupTry</th>
+      <th>autoEndWithNewCube</th>
     </tr>
   </thead>
   <tbody>
@@ -1289,7 +1432,6 @@ Name: 4933, dtype: float64
       <th>teleBoxToOpponentSwitchCount</th>
       <th>teleBoxToExchangeCount</th>
       <th>teleDroppedBoxCount</th>
-      <th>teleDefenseBlockCount</th>
     </tr>
   </thead>
   <tbody>
@@ -1301,7 +1443,6 @@ Name: 4933, dtype: float64
       <td>0</td>
       <td>2</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>14</td>
@@ -1309,7 +1450,6 @@ Name: 4933, dtype: float64
       <td>1</td>
       <td>0</td>
       <td>2</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -1321,6 +1461,44 @@ Name: 4933, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>match</th>
+      <th>team</th>
+      <th>endClimbedType</th>
+      <th>endClimbedRampSingle</th>
+      <th>endClimbedRampDouble</th>
+      <th>endClimbedExtendBar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3</td>
+      <td>4933</td>
+      <td>Didn't Try</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>4933</td>
+      <td>Didn't Try</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>4933</td>
+      <td>Didn't Try</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1331,44 +1509,32 @@ Name: 4933, dtype: float64
     <tr style="text-align: right;">
       <th>match</th>
       <th>team</th>
-      <th>endParked</th>
-      <th>endClimbedCenter</th>
-      <th>endClimbedSide</th>
-      <th>endClimbedRamp</th>
-      <th>endDeployRampTry</th>
-      <th>endDeployRamp</th>
+      <th>teleDefenseType</th>
+      <th>endCubeAttainment</th>
+      <th>endScoringAbility</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>3</td>
       <td>4933</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>&lt;30s</td>
+      <td>Ground</td>
+      <td>switch</td>
     </tr>
     <tr>
       <td>14</td>
       <td>4933</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>30-60s</td>
+      <td>Ground</td>
+      <td>switch</td>
     </tr>
     <tr>
       <td>25</td>
       <td>4933</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>&gt;60s</td>
+      <td>Ground</td>
+      <td>low scale</td>
     </tr>
   </tbody>
 </table>
@@ -1380,10 +1546,11 @@ Name: 4933, dtype: float64
       <th>team</th>
       <th>tippedBot</th>
       <th>deadBot</th>
-      <th>recoveredBot</th>
-      <th>penaltyStandardFoulCount</th>
-      <th>penaltyTechnicalFoulCount</th>
-      <th>penaltyYellowCardCount</th>
+      <th>recoveredTippedBot</th>
+      <th>recoveredDeadBot</th>
+      <th>penaltyStandardFoul</th>
+      <th>penaltyTechnicalFoul</th>
+      <th>penaltyYellowCard</th>
       <th>penaltyRedCard</th>
     </tr>
   </thead>
@@ -1398,6 +1565,7 @@ Name: 4933, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>14</td>
@@ -1409,10 +1577,12 @@ Name: 4933, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>25</td>
       <td>4933</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1432,7 +1602,6 @@ Matches Played =3.0
 index           5.0
 avgautocubes    0.0
 avgtelecubes    3.0
-totalclimbs     0.0
 totalmatches    3.0
 Name: 5212, dtype: float64
 <h5>Match Details</h5>
@@ -1441,8 +1610,7 @@ Name: 5212, dtype: float64
     <tr style="text-align: unset;">
       <th>match</th>
       <th>team</th>
-      <th>postCommentsPro</th>
-      <th>postCommentsCon</th>
+      <th>postComments</th>
     </tr>
   </thead>
   <tbody>
@@ -1450,18 +1618,15 @@ Name: 5212, dtype: float64
       <td>5</td>
       <td>5212</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>17</td>
       <td>5212</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>24</td>
       <td>5212</td>
-      <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1474,7 +1639,7 @@ Name: 5212, dtype: float64
       <th>team</th>
       <th>avgtelecubes</th>
       <th>avgautocubes</th>
-      <th>totalclimbs</th>
+      <th>totalmatches</th>
     </tr>
   </thead>
   <tbody>
@@ -1483,21 +1648,21 @@ Name: 5212, dtype: float64
       <td>5212</td>
       <td>3</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>17</td>
       <td>5212</td>
       <td>3</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>24</td>
       <td>5212</td>
       <td>3</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -1510,7 +1675,7 @@ Name: 5212, dtype: float64
       <th>autoCrossLineSuccess</th>
       <th>autoBoxToSwitchCount</th>
       <th>autoBoxToScaleCount</th>
-      <th>autoBoxPickupCount</th>
+      <th>teleBoxToSwitchCount</th>
     </tr>
   </thead>
   <tbody>
@@ -1520,7 +1685,7 @@ Name: 5212, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <td>17</td>
@@ -1528,7 +1693,7 @@ Name: 5212, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>24</td>
@@ -1549,7 +1714,7 @@ Name: 5212, dtype: float64
       <th>autoCrossLineTry</th>
       <th>autoBoxToSwitchTry</th>
       <th>autoBoxToScaleTry</th>
-      <th>autoBoxPickupTry</th>
+      <th>autoEndWithNewCube</th>
     </tr>
   </thead>
   <tbody>
@@ -1629,7 +1794,6 @@ Name: 5212, dtype: float64
       <th>teleBoxToOpponentSwitchCount</th>
       <th>teleBoxToExchangeCount</th>
       <th>teleDroppedBoxCount</th>
-      <th>teleDefenseBlockCount</th>
     </tr>
   </thead>
   <tbody>
@@ -1641,7 +1805,6 @@ Name: 5212, dtype: float64
       <td>0</td>
       <td>1</td>
       <td>3</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>17</td>
@@ -1651,7 +1814,6 @@ Name: 5212, dtype: float64
       <td>1</td>
       <td>1</td>
       <td>4</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>24</td>
@@ -1661,6 +1823,44 @@ Name: 5212, dtype: float64
       <td>1</td>
       <td>2</td>
       <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>match</th>
+      <th>team</th>
+      <th>endClimbedType</th>
+      <th>endClimbedRampSingle</th>
+      <th>endClimbedRampDouble</th>
+      <th>endClimbedExtendBar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5</td>
+      <td>5212</td>
+      <td>Didn't Try</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>5212</td>
+      <td>Used Ramp</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>5212</td>
+      <td>Didn't Try</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1671,44 +1871,32 @@ Name: 5212, dtype: float64
     <tr style="text-align: right;">
       <th>match</th>
       <th>team</th>
-      <th>endParked</th>
-      <th>endClimbedCenter</th>
-      <th>endClimbedSide</th>
-      <th>endClimbedRamp</th>
-      <th>endDeployRampTry</th>
-      <th>endDeployRamp</th>
+      <th>teleDefenseType</th>
+      <th>endCubeAttainment</th>
+      <th>endScoringAbility</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>5</td>
       <td>5212</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>switch</td>
     </tr>
     <tr>
       <td>17</td>
       <td>5212</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>switch</td>
     </tr>
     <tr>
       <td>24</td>
       <td>5212</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't try</td>
+      <td>Ground</td>
+      <td>switch</td>
     </tr>
   </tbody>
 </table>
@@ -1720,10 +1908,11 @@ Name: 5212, dtype: float64
       <th>team</th>
       <th>tippedBot</th>
       <th>deadBot</th>
-      <th>recoveredBot</th>
-      <th>penaltyStandardFoulCount</th>
-      <th>penaltyTechnicalFoulCount</th>
-      <th>penaltyYellowCardCount</th>
+      <th>recoveredTippedBot</th>
+      <th>recoveredDeadBot</th>
+      <th>penaltyStandardFoul</th>
+      <th>penaltyTechnicalFoul</th>
+      <th>penaltyYellowCard</th>
       <th>penaltyRedCard</th>
     </tr>
   </thead>
@@ -1738,6 +1927,7 @@ Name: 5212, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>17</td>
@@ -1749,10 +1939,12 @@ Name: 5212, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>24</td>
       <td>5212</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1772,7 +1964,6 @@ Matches Played =3.0
 index           0.000000
 avgautocubes    1.000000
 avgtelecubes    3.333333
-totalclimbs     0.000000
 totalmatches    3.000000
 Name: 31, dtype: float64
 <h5>Match Details</h5>
@@ -1781,8 +1972,7 @@ Name: 31, dtype: float64
     <tr style="text-align: unset;">
       <th>match</th>
       <th>team</th>
-      <th>postCommentsPro</th>
-      <th>postCommentsCon</th>
+      <th>postComments</th>
     </tr>
   </thead>
   <tbody>
@@ -1790,18 +1980,15 @@ Name: 31, dtype: float64
       <td>10</td>
       <td>31</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>15</td>
       <td>31</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>22</td>
       <td>31</td>
-      <td>0</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1814,7 +2001,7 @@ Name: 31, dtype: float64
       <th>team</th>
       <th>avgtelecubes</th>
       <th>avgautocubes</th>
-      <th>totalclimbs</th>
+      <th>totalmatches</th>
     </tr>
   </thead>
   <tbody>
@@ -1823,21 +2010,21 @@ Name: 31, dtype: float64
       <td>31</td>
       <td>3</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>15</td>
       <td>31</td>
       <td>3</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>22</td>
       <td>31</td>
       <td>4</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -1850,7 +2037,7 @@ Name: 31, dtype: float64
       <th>autoCrossLineSuccess</th>
       <th>autoBoxToSwitchCount</th>
       <th>autoBoxToScaleCount</th>
-      <th>autoBoxPickupCount</th>
+      <th>teleBoxToSwitchCount</th>
     </tr>
   </thead>
   <tbody>
@@ -1860,7 +2047,7 @@ Name: 31, dtype: float64
       <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>15</td>
@@ -1876,7 +2063,7 @@ Name: 31, dtype: float64
       <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -1889,7 +2076,7 @@ Name: 31, dtype: float64
       <th>autoCrossLineTry</th>
       <th>autoBoxToSwitchTry</th>
       <th>autoBoxToScaleTry</th>
-      <th>autoBoxPickupTry</th>
+      <th>autoEndWithNewCube</th>
     </tr>
   </thead>
   <tbody>
@@ -1915,7 +2102,7 @@ Name: 31, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -1969,7 +2156,6 @@ Name: 31, dtype: float64
       <th>teleBoxToOpponentSwitchCount</th>
       <th>teleBoxToExchangeCount</th>
       <th>teleDroppedBoxCount</th>
-      <th>teleDefenseBlockCount</th>
     </tr>
   </thead>
   <tbody>
@@ -1978,7 +2164,6 @@ Name: 31, dtype: float64
       <td>31</td>
       <td>1</td>
       <td>2</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1991,14 +2176,12 @@ Name: 31, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <td>22</td>
       <td>31</td>
       <td>2</td>
       <td>2</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2011,21 +2194,17 @@ Name: 31, dtype: float64
     <tr style="text-align: right;">
       <th>match</th>
       <th>team</th>
-      <th>endParked</th>
-      <th>endClimbedCenter</th>
-      <th>endClimbedSide</th>
-      <th>endClimbedRamp</th>
-      <th>endDeployRampTry</th>
-      <th>endDeployRamp</th>
+      <th>endClimbedType</th>
+      <th>endClimbedRampSingle</th>
+      <th>endClimbedRampDouble</th>
+      <th>endClimbedExtendBar</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>10</td>
       <td>31</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
+      <td>Didn't Try</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2033,9 +2212,7 @@ Name: 31, dtype: float64
     <tr>
       <td>15</td>
       <td>31</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
+      <td>Side</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2043,12 +2220,45 @@ Name: 31, dtype: float64
     <tr>
       <td>22</td>
       <td>31</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
+      <td>Side</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>match</th>
+      <th>team</th>
+      <th>teleDefenseType</th>
+      <th>endCubeAttainment</th>
+      <th>endScoringAbility</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>10</td>
+      <td>31</td>
+      <td>Didn't try</td>
+      <td>All of the above</td>
+      <td>low scale</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>31</td>
+      <td>Didn't try</td>
+      <td>All of the above</td>
+      <td>high scale</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>31</td>
+      <td>Didn't try</td>
+      <td>All of the above</td>
+      <td>high scale</td>
     </tr>
   </tbody>
 </table>
@@ -2060,10 +2270,11 @@ Name: 31, dtype: float64
       <th>team</th>
       <th>tippedBot</th>
       <th>deadBot</th>
-      <th>recoveredBot</th>
-      <th>penaltyStandardFoulCount</th>
-      <th>penaltyTechnicalFoulCount</th>
-      <th>penaltyYellowCardCount</th>
+      <th>recoveredTippedBot</th>
+      <th>recoveredDeadBot</th>
+      <th>penaltyStandardFoul</th>
+      <th>penaltyTechnicalFoul</th>
+      <th>penaltyYellowCard</th>
       <th>penaltyRedCard</th>
     </tr>
   </thead>
@@ -2078,6 +2289,7 @@ Name: 31, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>15</td>
@@ -2089,10 +2301,12 @@ Name: 31, dtype: float64
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>22</td>
       <td>31</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2109,6 +2323,48 @@ Name: 31, dtype: float64
 <div class="chapter">
 <a name=Match47></a>
 <h2>Match 47</h2>
+<h4>red Alliance</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>avgautocubes</th>
+      <th>avgtelecubes</th>
+      <th>totalmatches</th>
+    </tr>
+    <tr>
+      <th>team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1806</th>
+      <td>1.0</td>
+      <td>0.666667</td>
+      <td>9.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>2341</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2333</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table><h4>blue Alliance</h4>
 
 <h3>Allies</h3>
 <h4>Team: 2341</h4>
@@ -2137,6 +2393,48 @@ Team 6464 is not yet scouted
 <div class="chapter">
 <a name=Match55></a>
 <h2>Match 55</h2>
+<h4>red Alliance</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>avgautocubes</th>
+      <th>avgtelecubes</th>
+      <th>totalmatches</th>
+    </tr>
+    <tr>
+      <th>team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1806</th>
+      <td>1.0</td>
+      <td>0.666667</td>
+      <td>9.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>3247</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2395</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table><h4>blue Alliance</h4>
 
 <h3>Allies</h3>
 <h4>Team: 3247</h4>
@@ -2165,6 +2463,48 @@ Team 5621 is not yet scouted
 <div class="chapter">
 <a name=Match62></a>
 <h2>Match 62</h2>
+<h4>red Alliance</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>avgautocubes</th>
+      <th>avgtelecubes</th>
+      <th>totalmatches</th>
+    </tr>
+    <tr>
+      <th>team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1806</th>
+      <td>1.0</td>
+      <td>0.666667</td>
+      <td>9.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>1561</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1742</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table><h4>blue Alliance</h4>
 
 <h3>Allies</h3>
 <h4>Team: 1561</h4>
@@ -2193,6 +2533,48 @@ Team 3931 is not yet scouted
 <div class="chapter">
 <a name=Match76></a>
 <h2>Match 76</h2>
+<h4>blue Alliance</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>avgautocubes</th>
+      <th>avgtelecubes</th>
+      <th>totalmatches</th>
+    </tr>
+    <tr>
+      <th>team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1806</th>
+      <td>1.0</td>
+      <td>0.666667</td>
+      <td>9.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>5889</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3152</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table><h4>red Alliance</h4>
 
 <h3>Allies</h3>
 <h4>Team: 5889</h4>
@@ -2221,6 +2603,48 @@ Team 3284 is not yet scouted
 <div class="chapter">
 <a name=Match82></a>
 <h2>Match 82</h2>
+<h4>red Alliance</h4>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>avgautocubes</th>
+      <th>avgtelecubes</th>
+      <th>totalmatches</th>
+    </tr>
+    <tr>
+      <th>team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1806</th>
+      <td>1.0</td>
+      <td>0.666667</td>
+      <td>9.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>5730</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6730</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table><h4>blue Alliance</h4>
 
 <h3>Allies</h3>
 <h4>Team: 5730</h4>
