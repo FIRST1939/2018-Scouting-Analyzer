@@ -124,29 +124,66 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
     '''
     FileName = 'MatchReport.htm'
     with open(FileName, 'w') as File:
-        File.write('Our Robot:' + str(TeamNumber) + '\n')
-        File.write(str(MatchList) + '\n')
-        print(MatchList[0]['allies'])
+        File.write('<head>\n  <title>Pre-match scouting Report</title><br>\n')
+        File.write('<link rel="icon" href="RoboticsAvatar2018.png" />') 
+        File.write('<link rel="stylesheet" type="text/css" href="matchrep.css">')
+        File.write('</head>\n')
+        File.write('<body>\n')
+        File.write('<h1><img src="8bit_logo.jpg", width=50, height=60>')
+        File.write('Pre-match scouting Report</h1>\n')
+        File.write('<div class="robot">\n')
+        File.write('<h3>Our Robot' + '</h3>\n')
+        SearchTeam(Scoutdf, PivotDf, TeamNumber, File)
+
+        #print(MatchList[0]['allies'])
         LastScouted = max(Scoutdf['match'])
+        
+        # Prettying up the file output of the match list
+        File.write('<h3>Forthcoming Matches</h3>\n')        
+        
+        File.write('<table border="1" class="dataframe">\n  <thead>\n    <tr style="text-align: right;">\n')
+        File.write('      <th>Match</th>\n')
+        File.write('      <th>Alliance</th>\n')
+        File.write('      <th>Allies</th>\n')
+        File.write('      <th>Opponents</th>\n')
+        File.write('    </tr>\n  </thead>\n  <tbody>')
+
+        
         for match in MatchList:
             if match['match'] > LastScouted:
-                File.write('match' + str(match['match']) + '\n')
-                File.write('\nallies\n')
+                #File.write(str(match) + '\n')
+                File.write('    <tr style="text-align: right;">\n')
+                File.write('      <th><a href=#Match' + str(match['match']) + '>' + str(match['match']) + '</a></th>\n')
+                File.write('      <th>' + match['alliance'] + '</th>\n')
+                File.write('      <th>' + str(match['allies']) + '</th>\n')
+                File.write('      <th>' + str(match['opponents']) + '</th>\n')
+                File.write('    </tr>\n')                
+                File.write('\n')
+        File.write('</table>\n')
+        File.write('</div>\n')
+        #Printing reports for each forthcoming match
+        for match in MatchList:
+            if match['match'] > LastScouted:
+                File.write('<div class="chapter">\n')
+                File.write('<a name=Match' + str(match['match']) + '></a>\n')
+                File.write('<h2>Match ' + str(match['match']) + '</h2>\n')
+                File.write('\n<h3>Allies</h3>\n')
                 for ally in match['allies']:
                     SearchTeam(Scoutdf, PivotDf, ally, File)
                     File.write('\n') 
-                File.write('\nopponents\n')
+                File.write('\n<h3>Opponents</h3>\n')
                 for oppo in match['opponents']:
                     SearchTeam(Scoutdf, PivotDf, oppo, File)
                     File.write('\n')
-                return
+                File.write('</div>\n')
+
                 ''' with open ('MatchReport.csv', 'w') as File:
                     for match in MatchList:
                     Outstr = str(match)
                     File.write(Outstr)
                     '''
-
-    
+        File.write('</body>\n')    
+        
 def Day1Report(Scoutdf, PivotDf):
     '''(dataframe)->None
     Take Scouting data and analyze it by creating a report that will be presented
@@ -169,6 +206,11 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
     '''
     if File == None:
         print('Team:', TeamNumber)
+        
+        if TeamNumber not in PivotDf.team.values:
+            print('Team', TeamNumber, 'is not yet scouted')
+            return
+            
         PivotDf.reset_index(inplace = True)
         PivotDf.set_index('team', inplace = True)
         print('Matches Played =', PivotDf.loc[TeamNumber]['totalmatches'])
@@ -179,16 +221,64 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         
         print(Scoutdf[Scoutdf.team == TeamNumber])
     else :
-        File.write('Team: ' + str(TeamNumber) + '\n')
+        File.write('<h4>Team: ' + str(TeamNumber) + '</h4>\n')
+
         PivotDf.reset_index(inplace = True)
+                
+        if TeamNumber not in PivotDf.team.values:
+            File.write('\nTeam ' + str(TeamNumber) + ' is not yet scouted\n')
+            PivotDf.set_index('team', inplace = True)
+            return
+            
         PivotDf.set_index('team', inplace = True)
         File.write('Matches Played =' + str(PivotDf.loc[TeamNumber]['totalmatches']) + '\n')
         
-        File.write('\nMatch Summary\n')
+        File.write('\n<h5>Match Summary</h5>\n')
         File.write(str(PivotDf.loc[TeamNumber]))
-        File.write('\nMatch Details\n')
+        File.write('\n<h5>Match Details</h5>\n')
+
+        # Make pandas stop truncating the long text fields.
+        pd.set_option('display.max_colwidth', -1)
         
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html())
+        # Within each write, I'm specifying columns by number, taking off the
+        # decimal places, and suppressing printing of the index number
+        
+        # Comments        
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 35, 36], float_format='{0:.0f}'.format, index=False, justify='unset'))
+        File.write('\n<br>\n')        
+        
+        # Calculated Fields
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 37, 38, 39], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')        
+        
+        # Auton columns
+        # Good stuff
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 4, 6, 10, 14], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')
+        # Failed Stuff
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 3, 5, 9, 13], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')
+        # Own Goals
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 7, 8, 11, 12], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')
+        
+        # Teleop Columns
+        # Cube Moving
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 15, 16, 18, 19, 20, 21], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')
+        
+        # Climbing and Parking
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 29, 30, 31, 32, 33, 34], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')
+                
+        # Bad Stuff
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 22, 23, 24, 25, 26, 27, 28], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')
+
+        
+        
+        
+        
         
 def TeamStats(TeamDf):
     '''
@@ -249,7 +339,8 @@ def Main():
     
     if selection == '1':
         event = input('enter event code: ')
-        makeMatchList(event, 2017)
+        makeMatchList(event)
+        
     elif selection == '2':
         Team = enterTeam()       
         ReadData = readScout()
