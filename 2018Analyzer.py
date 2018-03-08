@@ -167,6 +167,17 @@ def MatchReport(MatchList, PivotDf, Scoutdf, TeamNumber):
                 File.write('<div class="chapter">\n')
                 File.write('<a name=Match' + str(match['match']) + '></a>\n')
                 File.write('<h2>Match ' + str(match['match']) + '</h2>\n')
+                                                               
+                us = [TeamNumber]+match['allies']
+                them = match['opponents'] 
+                print(PivotDf.head())
+                File.write('<h4>'+ match['alliance']+' Alliance</h4>\n')
+                File.write(PivotDf.loc[us].to_html())
+                File.write('<h4>'+ match['opposing']+' Alliance</h4>\n')
+                print(PivotDf.index.values)
+                if any(i in them for i in PivotDf.index.values):
+                    File.write(PivotDf.loc[them].to_html())
+                
                 File.write('\n<h3>Allies</h3>\n')
                 for ally in match['allies']:
                     SearchTeam(Scoutdf, PivotDf, ally, File)
@@ -244,12 +255,13 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         # decimal places, and suppressing printing of the index number
         
         # Comments        
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 35, 36], float_format='{0:.0f}'.format, index=False, justify='unset'))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 35], float_format='{0:.0f}'.format, index=False, justify='unset'))
         File.write('\n<br>\n')        
         
         # Calculated Fields
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 37, 38, 39], float_format='{0:.0f}'.format, index=False))
-        File.write('\n<br>\n')        
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 36, 37, 38], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')  
+        
         
         # Auton columns
         # Good stuff
@@ -264,15 +276,20 @@ def SearchTeam(Scoutdf, PivotDf, TeamNumber, File = None):
         
         # Teleop Columns
         # Cube Moving
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 15, 16, 18, 19, 20, 21], float_format='{0:.0f}'.format, index=False))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 14, 15, 16, 17, 18], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
         
         # Climbing and Parking
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 29, 30, 31, 32, 33, 34], float_format='{0:.0f}'.format, index=False))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 29, 30, 31, 32], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
+        
+        # Other Enumerated items
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 19, 33, 34], float_format='{0:.0f}'.format, index=False))
+        File.write('\n<br>\n')
+        
                 
         # Bad Stuff
-        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 22, 23, 24, 25, 26, 27, 28], float_format='{0:.0f}'.format, index=False))
+        File.write(Scoutdf[Scoutdf.team == TeamNumber].to_html(columns=[1, 2, 20, 21, 22, 23, 24, 25, 26, 27], float_format='{0:.0f}'.format, index=False))
         File.write('\n<br>\n')
 
         
@@ -285,7 +302,11 @@ def TeamStats(TeamDf):
     Takes full dataframe, and creates per match calculated values. Creates a pivot
     dataframe with overall team statistics
     '''
+    # Normalize column names
+    # Database renamed match and team to matchNo and teamNo.  We put back.
+    TeamDf.rename(columns = {'teamNo':'team', 'matchNo': 'match'}, inplace = True)
     
+    # Calculate cube usage
     TeamDf['avgtelecubes'] = TeamDf['teleBoxToSwitchCount'] + TeamDf['teleBoxToScaleCount'] 
     TeamDf['avgtelecubes'] += TeamDf['teleBoxToExchangeCount'] 
     TeamDf['avgtelecubes'] += TeamDf['teleBoxToOpponentSwitchCount']
@@ -294,12 +315,19 @@ def TeamStats(TeamDf):
     TeamDf['avgautocubes'] += TeamDf['autoBoxToScaleCount']
     TeamDf['avgautocubes'] += TeamDf['autoBoxToWrongScaleCount']
     
-    TeamDf['totalclimbs'] = TeamDf['endClimbedCenter'] + TeamDf['endClimbedSide']
-    TeamDf['totalclimbs'] = TeamDf['endClimbedRamp'] + TeamDf['endDeployRamp']
+    
+    # Calculate climbs
+    #TeamDf['totalclimbs'] = TeamDf['endClimbedCenter'] + TeamDf['endClimbedSide']
+    #TeamDf['totalclimbs'] = TeamDf['endClimbedRamp'] + TeamDf['endDeployRamp']
+    
+    tempDf = TeamDf[['team', 'endClimbedType']]
+    climbDf = pd.pivot_table(tempDf,values=['endClimbedType'],index=['team'],
+                             columns='endClimbedType',aggfunc=len,fill_value=0)
+    print(climbDf)
     
     #TeamDf['PostiveComments'] = TeamDf['postCommentsPro'] 
     
-    TeamDf['totalmatches'] = TeamDf['team'] 
+    TeamDf['totalmatches'] = 1
     
     AvgTeamPivot = pd.pivot_table(TeamDf, values = ['avgtelecubes', 'avgautocubes'], index = 'team', aggfunc = np.average)
     MatchCount = pd.pivot_table(TeamDf, values = ['totalmatches', 'totalclimbs'], index = 'team', aggfunc = np.count_nonzero)
@@ -335,6 +363,7 @@ def Main():
     print('press 2 to get a prematch Scouting Report')
     print('press 3 to get a single team report')
     print('press 4 to get the Day 1 Match Report')
+    print('press 9 for functional math test')
     selection = input('enter number: ')
     
     if selection == '1':
@@ -353,6 +382,7 @@ def Main():
     elif selection == '3':
         Team = int(enterTeam())       
         ReadData = readScout()
+        print(ReadData)
         MatchList = readMatchList()
         TeamDf, PivotDf = TeamStats(ReadData)
         SearchTeam(TeamDf, PivotDf, Team)
@@ -360,6 +390,18 @@ def Main():
         ReadData = readScout()
         TeamDf, PivotDf = TeamStats(ReadData)
         Day1Report(TeamDf, PivotDf)
+    elif selection == '9':
+        ReadData = readScout()
+        print(ReadData)
+        TeamDf, PivotDf = TeamStats(ReadData)
+        
+        print()
+        print('TeamDF')
+        print(TeamDf)
+        print('\nTeam Pivot')
+        print(PivotDf)
+        
+        
 Main()
       
                 
