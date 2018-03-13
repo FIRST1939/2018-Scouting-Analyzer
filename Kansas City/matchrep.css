@@ -1,0 +1,13 @@
+h1 {font-size: 3em}
+h2 {border-style: solid none solid none;
+    border-width: thin;
+    font-size: 2.5em}
+h3 {font-size: 2em}
+h4 {border-style: dotted none none none;
+    border-width: thin;
+    padding-left: 100 px;
+    font-size: 1.5em}
+h5 {font-size: 1.25em;
+    font-style: oblique}
+table {border-collapse: collapse}
+tr {text-align: center}
